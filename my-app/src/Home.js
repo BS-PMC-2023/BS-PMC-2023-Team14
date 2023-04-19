@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -55,3 +56,5 @@ const Home = () => {
 }
 
 export default Home;
+=======
+>>>>>>> 0e3dd91deffb2f901752eedd18e6a3d8c377110d
