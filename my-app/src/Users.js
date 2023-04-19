@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Customer = () => {
+const Users = () => {
     const [custlist, custupdate] = useState([]);
     const [haveedit, editchange] = useState(false);
     const [haveview, viewchange] = useState(false);
@@ -15,11 +15,11 @@ const Customer = () => {
     useEffect(() => {
         GetUserAccess();
         loadcustomer();
-       
+
     }, []);
 
     const loadcustomer = () => {
-        fetch("http://localhost:8000/customer").then(res => {
+        fetch("http://localhost:8000/users").then(res => {
             if (!res.ok) {
                 return false
             }
@@ -31,7 +31,7 @@ const Customer = () => {
 
     const GetUserAccess = () => {
         const userrole = sessionStorage.getItem('userrole') != null ? sessionStorage.getItem('userrole').toString() : '';
-        fetch("http://localhost:8000/roleaccess?role=" + userrole + "&menu=customer").then(res => {
+        fetch("http://localhost:8000/roleaccess?role=" + userrole + "&menu=user").then(res => {
             if (!res.ok) {
                 navigate('/');
             toast.warning('You are not authorized to access');
@@ -120,4 +120,4 @@ const Customer = () => {
     );
 }
 
-export default Customer;
+export default Users;
