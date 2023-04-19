@@ -26,7 +26,7 @@ const Appheader = () => {
                 <div className="header">
 
                     <Link to={'/'}>Home</Link>
-                    <Link to={'/customer'}>Customer</Link>
+                    <Link to={'/users'}>Users</Link>
                     <span style={{ marginLeft: '70%' }}>Welcome <b>{displayusername}</b></span>
                     <Link style={{ float: 'right' }} to={'/login'}>Logout</Link>
                 </div>

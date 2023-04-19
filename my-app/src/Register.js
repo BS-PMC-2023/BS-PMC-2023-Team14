@@ -9,7 +9,7 @@ const Register = () => {
     const [password, passwordchange] = useState("");
     const [email, emailchange] = useState("");
     const [phone, phonechange] = useState("");
-    const [country, countrychange] = useState("india");
+    const [country, countrychange] = useState("");
     const [address, addresschange] = useState("");
     const [gender, genderchange] = useState("female");
 
@@ -111,9 +111,7 @@ const Register = () => {
                                     <div className="form-group">
                                         <label>Country <span className="errmsg">*</span></label>
                                         <select value={country} onChange={e => countrychange(e.target.value)} className="form-control">
-                                            <option value="india">India</option>
-                                            <option value="usa">USA</option>
-                                            <option value="singapore">Singapore</option>
+                                            
                                         </select>
                                     </div>
                                 </div>
