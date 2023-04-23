@@ -2,32 +2,28 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
-    const usenavigate = useNavigate();
-    const [customerlist, listupdate] = useState(null);
-   
-    useEffect(() => {
-       
+  const usenavigate = useNavigate();
+  const [customerlist, listupdate] = useState(null);
 
-        // let jwttoken = sessionStorage.getItem('jwttoken');
-        // fetch("https://localhost:44308/Customer", {
-        //     headers: {
-        //         'Authorization': 'bearer ' + jwttoken
-        //     }
-        // }).then((res) => {
-        //     return res.json();
-        // }).then((resp) => {
-        //     listupdate(resp);
-        // }).catch((err) => {
-        //     console.log(err.messsage)
-        // });
+  useEffect(() => {
+    // let jwttoken = sessionStorage.getItem('jwttoken');
+    // fetch("https://localhost:44308/Customer", {
+    //     headers: {
+    //         'Authorization': 'bearer ' + jwttoken
+    //     }
+    // }).then((res) => {
+    //     return res.json();
+    // }).then((resp) => {
+    //     listupdate(resp);
+    // }).catch((err) => {
+    //     console.log(err.messsage)
+    // });
+  }, []);
 
-    }, []);
-
-    return (
-        <div>
-            
-            <h1 className="text-center">Welcome to Nihira Techiees</h1>
-            {/* <table className="table table-bordered">
+  return (
+    <div>
+      <h1 className="text-center">Welcome to the HomePage</h1>
+      {/* <table className="table table-bordered">
                 <thead>
                     <tr>
                         <td>Code</td>
@@ -51,8 +47,8 @@ const Home = () => {
                 </tbody>
 
             </table> */}
-        </div>
-    );
-}
+    </div>
+  );
+};
 
 export default Home;
