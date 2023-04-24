@@ -12,7 +12,7 @@ function App() {
   };
   return (
     <BrowserRouter>
-      {user && <Navbar handleLogout={handleLogout} />}      
+      {user && <Navbar handleLogout={handleLogout} />}
       <Routes>
         {user && <Route path="/" exact element={<Main />} />}
         <Route path="/signup" exact element={<Signup />} />
