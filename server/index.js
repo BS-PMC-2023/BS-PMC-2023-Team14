@@ -4,7 +4,6 @@ const app = express();
 const cors = require("cors");
 
 // database connection
-connection();
 
 // middlewares
 app.use(express.json());
