@@ -4,36 +4,36 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const Signup = () => {
-    const [data, setData] = useState({
+  const [data, setData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-    });
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-    const handleChange = ({ currentTarget: input }) => {
+  const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
-};
+  };
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const url = "http://localhost:5000/api/users";
-        { data: res } = await axios.post(url, data);
-        navigate("/login");
-        console.log(res.message);
+      const url = "http://localhost:5000/api/users";
+      const { data: res } = await axios.post(url, data);
+      navigate("/login");
+      console.log(res.message);
     } catch (error) {
-        if (
+      if (
         error.response &&
         error.response.status >= 400 &&
         error.response.status <= 500
-        ) {
+      ) {
         setError(error.response.data.message);
-        }
+      }
     }
-    };
+  };
 
   return (
     <div className={styles.signup_container}>
