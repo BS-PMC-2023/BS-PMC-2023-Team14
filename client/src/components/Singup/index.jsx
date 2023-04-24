@@ -97,3 +97,34 @@ const Signup = () => {
 };
 
 export default Signup;
+
+/*
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = "http://localhost:5000/api/users";
+      const { data: res } = await axios.post(url, data);
+  
+      // send welcome email to user
+      emailjs
+        .send("service_061uyjc", "template_qejy7ja", {
+          to_email: data.email,
+        }, "Ac1RL4TgJZVZgpMSY")
+        .then((result) => {
+          console.log(result.text);
+        }, (error) => {
+          console.log(error.text);
+        });
+  
+      navigate("/login");
+      console.log(res.message);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };*/
