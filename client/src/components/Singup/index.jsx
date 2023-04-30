@@ -21,7 +21,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:5000/api/users";
+      const url = "http://localhost:4000/api/users";
       const { data: res } = await axios.post(url, data);
   
       // send welcome email to user
@@ -115,7 +115,7 @@ export default Signup;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:5000/api/users";
+      const url = "http://localhost:4000/api/users";
       const { data: res } = await axios.post(url, data);
   
       // send welcome email to user
