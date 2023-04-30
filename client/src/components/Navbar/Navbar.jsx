@@ -9,19 +9,29 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <Link to="/" >
-        <h1 className="title">HealthFuel</h1>
-      </Link>
+      <h1 className="title">HealthFuel</h1>
       <ul className="nav_links">
         <li>
-          <Link to="/contact" className="nav_link">
-            Contact
-          </Link>
+          <div className="navbarworld">
+            <Link className="nav_link" to="/" >
+              <p >Home</p>
+            </Link>
+          </div>
         </li>
         <li>
-          <button className="white_btn" onClick={handleLogout}>
-            Logout
-          </button>
+          <div className="navbarworld">
+            <Link to="/contact" className="nav_link">
+              <p >Contact</p>
+            </Link>
+          </div>
+        </li>
+        <li>
+          <div className="buttonDiv" >
+            <button className="white_btn" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+
         </li>
       </ul>
     </nav>
