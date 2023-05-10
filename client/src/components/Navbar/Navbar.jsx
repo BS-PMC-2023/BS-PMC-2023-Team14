@@ -26,6 +26,13 @@ const Navbar = () => {
           </div>
         </li>
         <li>
+          <div className="navbarworld">
+            <Link to="/volunteers" className="nav_link">
+              <p >volunteers</p>
+            </Link>
+          </div>
+        </li>
+        <li>
           <div className="buttonDiv" >
             <button className="white_btn" onClick={handleLogout}>
               Logout
