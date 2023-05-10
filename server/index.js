@@ -5,6 +5,7 @@ const cors = require("cors");
 const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
+const passwordResetRoutes = require("./routes/passwordReset");
 //const authRoutes = require("./routes/auth_v");
 //const userRoutes = require("./routes/Volunteers");
 // database connection
@@ -17,6 +18,7 @@ app.use(cors());
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/password-reset", passwordResetRoutes);
 
 // routes
 //app.use("/api/Volunteers", userRoutes);

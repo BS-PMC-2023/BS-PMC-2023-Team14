@@ -9,6 +9,9 @@ import AboutPage from "./components/AboutPage/AboutPage.jsx";
 import UserTypeForm from "./components/UserTypeForm/UserTypeForm.jsx";
 import LoginVolunteer from "./components/LoginVolunteer/index.jsx";
 import HowToUse from "./components/HowToUse/HowToUse.jsx";
+import ForgotPassword from "./components/ForgotPassword";
+import PasswordReset from "./components/PasswordReset";
+
 function App() {
   const user = localStorage.getItem("token");
   const Volunteers = localStorage.getItem("token");
@@ -31,6 +34,8 @@ function App() {
         <Route path="/" element={<Navigate replace to="/UserTypeForm" />} />
         <Route path="/LoginVolunteer" exact element={<LoginVolunteer />} />
         <Route path="/HowToUse" exact element={<HowToUse />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/password-reset/:id/:token" element={<PasswordReset />} />
       </Routes>
     </BrowserRouter>
   );
