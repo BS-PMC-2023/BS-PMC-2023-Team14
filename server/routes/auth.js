@@ -40,4 +40,15 @@ const validate = (data) => {
   return schema.validate(data);
 };
 
+router.get('/', (req, res) => {
+  MyModel.find({}, (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Internal server error');
+    } else {
+      res.send(data);
+    }
+  });
+});
+
 module.exports = router;
