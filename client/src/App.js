@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Contact from "./components/Contact/contact";
 import Navbar from "./components/Navbar/Navbar";
 import Volunteer from "./components/Volunteer/Volunteers.jsx";
+import AboutPage from "./components/AboutPage/AboutPage.jsx";
 import UserTypeForm from "./components/UserTypeForm/UserTypeForm.jsx";
 import LoginVolunteer from "./components/LoginVolunteer/index.jsx";
 function App() {
@@ -23,10 +24,11 @@ function App() {
         <Route path="/login" exact element={<Login />} />
 
         <Route path="/contact" exact element={<Contact />} />
-        <Route path="/Volunteers" exact element={<Volunteer/>} />
+        <Route path="/Volunteers" exact element={<Volunteer />} />
+        <Route path="/AboutPage" exact element={<AboutPage />} />
         <Route path="/UserTypeForm" exact element={<UserTypeForm />} />
         <Route path="/" element={<Navigate replace to="/UserTypeForm" />} />
-        <Route path="/LoginVolunteer" exact element={<LoginVolunteer/>} />
+        <Route path="/LoginVolunteer" exact element={<LoginVolunteer />} />
       </Routes>
     </BrowserRouter>
   );
