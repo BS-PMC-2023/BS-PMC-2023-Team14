@@ -1,27 +1,38 @@
-//import styles from "./styles.module.css";
-//import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Navbar from "../Navbar/Navbar";
+import Map from "../map";
+import "../Main/styles.module.css"
+
 const Main = ({ user }) => {
+  const [users, setUsers] = useState([]);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
   };
+
+  useEffect(() => {
+    axios.get('/api/users')
+      .then(response => {
+        setUsers(response.data);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
   return (
-	<>
+    <>
       {user && <Navbar handleLogout={handleLogout} />}
+      
+      <div className="mainDiv">
+        <p>with this map You can see nearby gyms for your current location.</p>
+            <Map/>
+      </div>
     </>
-	/*
-    <div className={styles.main_container}>
-      <nav className={styles.navbar}>
-        <h1>HealthFuel</h1>
-        <Link to="/contact">Contact</Link>
-        {user && location.pathname == "/login" && location.pathname == "/signup" && (
-          <button className={styles.white_btn} onClick={handleLogout}>
-            Logout
-          </button>
-        )}
-      </nav>
-    </div>*/
   );
 };
+
 export default Main;
