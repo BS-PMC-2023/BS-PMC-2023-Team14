@@ -40,6 +40,14 @@ const Navbar = () => {
           </div>
         </li>
         <li>
+          <div className="navbarworld">
+            <Link to="/HowToUse" className="nav_link">
+              <p>HowToUse</p>
+            </Link>
+          </div>
+        </li>
+
+        <li>
           <div className="buttonDiv">
             <button className="white_btn" onClick={handleLogout}>
               Logout
