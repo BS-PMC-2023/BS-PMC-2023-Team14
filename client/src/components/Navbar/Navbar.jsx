@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <h1 className="title">HealthFuel</h1>
+      <h1 className="title" >HealthFuel</h1>
       <ul className="nav_links">
         <li>
           <div className="navbarworld">
@@ -32,6 +32,14 @@ const Navbar = () => {
             </Link>
           </div>
         </li>
+        <li>
+          <div className="navbarworld">
+            <Link to="/HowToUse" className="nav_link">
+              <p >HowToUse</p>
+            </Link>
+          </div>
+        </li>
+        
         <li>
           <div className="buttonDiv" >
             <button className="white_btn" onClick={handleLogout}>

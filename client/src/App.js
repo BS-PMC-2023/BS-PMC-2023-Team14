@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Volunteer from "./components/Volunteer/Volunteers.jsx";
 import UserTypeForm from "./components/UserTypeForm/UserTypeForm.jsx";
 import LoginVolunteer from "./components/LoginVolunteer/index.jsx";
+import HowToUse from "./components/HowToUse/HowToUse.jsx";
 function App() {
   const user = localStorage.getItem("token");
   const Volunteers = localStorage.getItem("token");
@@ -27,6 +28,7 @@ function App() {
         <Route path="/UserTypeForm" exact element={<UserTypeForm />} />
         <Route path="/" element={<Navigate replace to="/UserTypeForm" />} />
         <Route path="/LoginVolunteer" exact element={<LoginVolunteer/>} />
+        <Route path="/HowToUse" exact element={<HowToUse/>} />
       </Routes>
     </BrowserRouter>
   );
