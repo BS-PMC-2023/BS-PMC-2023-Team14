@@ -16,12 +16,12 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
-            steps {
-                sh 'chmod -R 777 client/node_modules'
-                sh 'npm test'
-            }
-        }
+       // stage('Test') {
+       //     steps {
+       //         sh 'chmod -R 777 client/node_modules'
+       //         sh 'npm test'
+       //     }
+       // }
         stage('Code Coverage') {
         steps {
             sh 'npm t -- --coverage'
