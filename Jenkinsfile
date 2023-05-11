@@ -1,33 +1,55 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:lts-buster-slim'
-            args '-p 3000:3000'
+  agent any
+  environment {
+    DOCKER_COMPOSE_VERSION = '1.29.2'
+  }
+  stages {
+    stage('Install Dependencies') {
+        agent {
+            docker {
+                image 'node:16-alpine'
+            }
         }
-    }
-    stages {
-        stage('Build') {
-            steps {
+        steps {
+                dir('client') {
                 sh 'npm install'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'chmod -R 777 node_modules'
-                sh 'npm test'
+    }
+    stage('Run Jest Tests') {
+        agent {
+            docker {
+                image 'node:16-alpine'
             }
         }
-        stage('Code Coverage') {
         steps {
-            sh 'npm t -- --coverage'
-        }
-        }
-        stage('Deliver') {
-            steps {
-
-              echo 'Finished using the web site'
-
-            }
+            sh 'cd client && npm run test'
         }
     }
+    stage('Build Docker Images') {
+      steps {
+        script {
+          docker.build('client', './client')
+          docker.build('server', './server')
+        }
+      }
+    }
+    stage('Run Docker Containers with Docker Compose') {
+      steps {
+        sh 'curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose'
+        sh 'chmod +x docker-compose'
+        sh './docker-compose up -d'
+      }
+    }
+    stage('Stop Docker Containers with Docker Compose') {
+      steps {
+        sh './docker-compose down'
+      }
+    }
+  }
+  post {
+    always {
+      sh 'docker images -q | xargs docker rmi -f || true'
+    }
+  }
 }
