@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'chmod -R 777 node_modules'
+                sh 'chmod -R 777 client/node_modules'
                 sh 'npm test'
             }
         }
