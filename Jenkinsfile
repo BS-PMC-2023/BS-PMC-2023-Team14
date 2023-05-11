@@ -8,7 +8,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                dir('client') {
+                    sh 'npm install'
+                }
+                dir('server') {
+                    sh 'npm install'
+                }
             }
         }
         stage('Test') {
