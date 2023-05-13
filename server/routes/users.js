@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
 });
 
 
-router.get("/api/users", async (req, res) => {
+router.get("/all", async (req, res) => {
   try {
     const users = await User.find({});
     res.json(users);
@@ -34,6 +34,33 @@ router.get("/api/users", async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+router.post("/toggle-admin", async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    if (user.isAdmin) {
+      user.isAdmin = false;
+    } else {
+      user.isAdmin = true;
+    }
+
+    await user.save();
+
+    if (user.isAdmin) {
+      res.status(200).send({ message: "Admin added successfully" });
+    } else {
+      res.status(200).send({ message: "Admin removed successfully" });
+    }
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 
 module.exports = router;
 
