@@ -11,26 +11,35 @@ import LoginVolunteer from "./components/LoginVolunteer/index.jsx";
 import HowToUse from "./components/HowToUse/HowToUse.jsx";
 import ForgotPassword from "./components/ForgotPassword";
 import PasswordReset from "./components/PasswordReset";
+import AdminPanel from "./components/AdminPanel/AdminPanel.jsx";
 
 function App() {
-  const user = localStorage.getItem("token");
+  const isAdmin = localStorage.getItem("isAdmin");
+
+  const userToken = localStorage.getItem("token");
+
   const Volunteers = localStorage.getItem("token");
+
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.reload();
+    localStorage.removeItem("isAdmin");
+    window.location = "/";
   };
+
   return (
     <BrowserRouter>
-      {user && <Navbar handleLogout={handleLogout} />}
+      {userToken && <Navbar isAdmin={isAdmin} handleLogout={handleLogout} />}
       <Routes>
-        {user && <Route path="/" exact element={<Main />} />}
+        {userToken && <Route path="/" exact element={<Main />} />}
+        {isAdmin && <Route path="/adminPanel" exact element={<AdminPanel />} />}
+
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/login" exact element={<Login />} />
-
         <Route path="/contact" exact element={<Contact />} />
         <Route path="/Volunteers" exact element={<Volunteer />} />
         <Route path="/AboutPage" exact element={<AboutPage />} />
         <Route path="/UserTypeForm" exact element={<UserTypeForm />} />
+
         <Route path="/" element={<Navigate replace to="/UserTypeForm" />} />
         <Route path="/LoginVolunteer" exact element={<LoginVolunteer />} />
         <Route path="/HowToUse" exact element={<HowToUse />} />

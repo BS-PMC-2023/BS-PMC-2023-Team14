@@ -1,14 +1,9 @@
 import { Link } from "react-router-dom";
 import "../css/Navbar.css";
 
-const Navbar = () => {
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.reload();
-  };
-
+const Navbar = ({ handleLogout, isAdmin }) => {
   return (
-    
+
     <header className="navbar">
       <h1 className="title">HealthFuel</h1>
       <ul className="nav_links">
@@ -47,7 +42,13 @@ const Navbar = () => {
             </Link>
           </div>
         </li>
-
+        {isAdmin === 'true' && <li>
+          <div className="navbarworld">
+            <Link to="/adminPanel" className="nav_link">
+              <p>Admin Panel</p>
+            </Link>
+          </div>
+        </li>}
         <li>
           <div className="buttonDiv">
             <button className="white_btn" onClick={handleLogout}>
