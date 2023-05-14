@@ -1,55 +1,53 @@
 pipeline {
-  agent any
-  environment {
-    DOCKER_COMPOSE_VERSION = '1.29.2'
-  }
-  stages {
-    stage('Install Dependencies') {
-        agent {
-            docker {
-                image 'node:16-alpine'
-            }
+    agent {
+        docker {
+            image 'node:lts-buster-slim'
+            args '-p 3000:3000'
         }
-        steps {
+    }
+    stages {
+        stage('Install Dependencies') {
+            agent {
+                docker {
+                    image 'node:16-alpine'
+                }
+            }
+            steps {
                 dir('client') {
-                sh 'npm install'
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('client') {
+                    sh 'npm install'
+                }
+                dir('server') {
+                    sh 'npm install'
+                }
+            }
+        }
+        // stage('Test') {
+        //     steps {
+        //         sh 'chmod -R 777 client/node_modules'
+        //         sh 'npm test'
+        //     }
+        // }
+        stage('Code Coverage') {
+            steps {
+                dir('client') {
+                    sh 'npm t -- --coverage'
+                }
+                dir('server') {
+                    sh 'npm t -- --coverage'
+                }
+            }
+        }
+        stage('Deliver') {
+            steps {
+                echo 'Finished using the web site'
             }
         }
     }
-    stage('Run Jest Tests') {
-        agent {
-            docker {
-                image 'node:16-alpine'
-            }
-        }
-        steps {
-            sh 'cd client && npm run test'
-        }
-    }
-    stage('Build Docker Images') {
-      steps {
-        script {
-          docker.build('client', './client')
-          docker.build('server', './server')
-        }
-      }
-    }
-    stage('Run Docker Containers with Docker Compose') {
-      steps {
-        sh 'curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o docker-compose'
-        sh 'chmod +x docker-compose'
-        sh './docker-compose up -d'
-      }
-    }
-    stage('Stop Docker Containers with Docker Compose') {
-      steps {
-        sh './docker-compose down'
-      }
-    }
-  }
-  post {
-    always {
-      sh 'docker images -q | xargs docker rmi -f || true'
-    }
-  }
 }
