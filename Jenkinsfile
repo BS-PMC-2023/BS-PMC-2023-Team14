@@ -6,18 +6,6 @@ pipeline {
         }
     }
     stages {
-        stage('Install Dependencies') {
-            agent {
-                docker {
-                    image 'node:16-alpine'
-                }
-            }
-            steps {
-                dir('client') {
-                    sh 'npm install'
-                }
-            }
-        }
         stage('Build') {
             steps {
                 dir('client') {
@@ -28,12 +16,13 @@ pipeline {
                 }
             }
         }
-        // stage('Test') {
-        //     steps {
-        //         sh 'chmod -R 777 client/node_modules'
-        //         sh 'npm test'
-        //     }
-        // }
+        stage('Run Tests') {
+            steps {
+                dir('client') {
+                    sh 'npm run test.js'
+                }
+            }
+        }
         stage('Code Coverage') {
             steps {
                 dir('client') {
