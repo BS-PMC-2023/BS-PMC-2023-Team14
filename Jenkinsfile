@@ -16,22 +16,25 @@ pipeline {
                 }
             }
         }
-       // stage('Test') {
-       //     steps {
-       //         sh 'chmod -R 777 client/node_modules'
-       //         sh 'npm test'
-       //     }
-       // }
+        // stage('Test') {
+        //     steps {
+        //         sh 'chmod -R 777 client/node_modules'
+        //         sh 'npm test'
+        //     }
+        // }
         stage('Code Coverage') {
-        steps {
-            sh 'npm t -- --coverage'
-        }
+            steps {
+                dir('client') {
+                    sh 'npm t -- --coverage'
+                }
+                dir('server') {
+                    sh 'npm t -- --coverage'
+                }
+            }
         }
         stage('Deliver') {
             steps {
-
-              echo 'Finished using the web site'
-
+                echo 'Finished using the web site'
             }
         }
     }
