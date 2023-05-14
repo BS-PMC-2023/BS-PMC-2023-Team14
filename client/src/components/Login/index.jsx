@@ -18,6 +18,7 @@ const Login = () => {
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("isAdmin", res.data.isAdmin);
+      localStorage.setItem("isVolunteer", res.data.isAdmin);
       window.location = "/";
     } catch (error) {
       if (

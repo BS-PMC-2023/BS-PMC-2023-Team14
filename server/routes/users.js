@@ -34,6 +34,15 @@ router.get("/all", async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+router.get("/allVolunteer", async (req, res) => {
+  try {
+    const users = await User.find({ isVolunteer: true }); // Find users where isVolunteer is true
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 router.post("/toggle-admin", async (req, res) => {
   try {
@@ -61,6 +70,31 @@ router.post("/toggle-admin", async (req, res) => {
   }
 });
 
+router.post("/toggle-volunteer", async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    if (user.isVolunteer) {
+      user.isVolunteer = false;
+    } else {
+      user.isVolunteer = true;
+    }
+
+    await user.save();
+
+    if (user.isVolunteer) {
+      res.status(200).send({ message: "Admin added successfully" });
+    } else {
+      res.status(200).send({ message: "Admin removed successfully" });
+    }
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
 
 module.exports = router;
 

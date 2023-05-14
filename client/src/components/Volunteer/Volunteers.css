@@ -9,12 +9,14 @@
 .users-table td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: left;
+  text-align: center;
 }
 
 .users-table th {
   background-color: #007bff;
   color: #fff;
+
+  text-align: center;
 }
 
 .users-table tr:nth-child(even) {

@@ -21,6 +21,17 @@ function AdminPanel() {
         }
         await fetchAllUsers();
     }
+    async function handleVolunteer(id) {
+        try {
+            const response = await axios.post("http://localhost:4000/api/users/toggle-volunteer", {
+                userId: id,
+            });
+            console.log("handleVolunteer: ", response.data.message);
+        } catch (error) {
+            console.log("handleVolunteer: ", error);
+        }
+        await fetchAllUsers();
+    }
 
     async function fetchAllUsers() {
         try {
@@ -41,6 +52,7 @@ function AdminPanel() {
                         <th>Email</th>
                         <th>Role</th>
                         <th>Actions</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,6 +66,12 @@ function AdminPanel() {
                                     Make Admin</button>)}
                                 {data.isAdmin && (<button onClick={() => handleAdmin(data._id)}>
                                     Remove Admin</button>)}
+                            </td>
+                            <td>
+                                {!data.isVolunteer && (<button onClick={() => handleVolunteer(data._id)}>
+                                    Make Volunteer</button>)}
+                                {data.isVolunteer&& (<button onClick={() => handleVolunteer(data._id)}>
+                                    Remove Volunteer</button>)}
                             </td>
                         </tr>
                     ))}
