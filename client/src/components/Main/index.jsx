@@ -3,6 +3,9 @@ import axios from 'axios';
 import Navbar from "../Navbar/Navbar";
 import Map from "../map";
 import "../Main/styles.module.css"
+import Goals from "../setgoals.jsx"
+import Goalsdisplay from "../goalsDisplay"
+
 
 const Main = ({ user }) => {
   const [users, setUsers] = useState([]);
@@ -29,8 +32,8 @@ const Main = ({ user }) => {
       {user && <Navbar handleLogout={handleLogout} />}
 
       <div className="mainDiv">
-        <p>with this map You can see nearby gyms for your current location.</p>
-        <Map />
+      <Goalsdisplay/>
+        <Goals/>
       </div>
     </>
   );

@@ -23,7 +23,7 @@ const Signup = () => {
     try {
       const url = "http://localhost:4000/api/users";
       const { data: res } = await axios.post(url, data);
-  
+
       // send welcome email to user
       emailjs
         .send("service_061uyjc", "template_qejy7ja", {
@@ -34,7 +34,7 @@ const Signup = () => {
         }, (error) => {
           console.log(error.text);
         });
-  
+
       navigate("/login");
       console.log(res.message);
     } catch (error) {
@@ -55,13 +55,13 @@ const Signup = () => {
           <h1>Welcome Back</h1>
           <Link to="/login">
             <button type="button" className={styles.white_btn}>
-              Sing in
+              Sign in
             </button>
           </Link>
         </div>
         <div className={styles.right}>
           <form className={styles.form_container} onSubmit={handleSubmit}>
-            <h1>Create Account</h1>
+            <h1 style={{ color: '#3bb19b' }}>Create Account</h1>
             <input
               type="text"
               placeholder="First Name"
@@ -100,7 +100,7 @@ const Signup = () => {
             />
             {error && <div className={styles.error_msg}>{error}</div>}
             <button type="submit" className={styles.green_btn}>
-              Sing Up
+              Sign Up
             </button>
           </form>
         </div>
