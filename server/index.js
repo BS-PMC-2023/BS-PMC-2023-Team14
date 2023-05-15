@@ -6,6 +6,7 @@ const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const passwordResetRoutes = require("./routes/passwordReset");
+const exercisesRoutes = require("./routes/exercises");
 //const authRoutes = require("./routes/auth_v");
 //const userRoutes = require("./routes/Volunteers");
 
@@ -25,8 +26,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-
 // routes
+app.use("/api/exercises", exercisesRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/password-reset", passwordResetRoutes);
