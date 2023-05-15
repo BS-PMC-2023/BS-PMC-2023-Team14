@@ -9,6 +9,7 @@ import AboutPage from "./components/AboutPage/AboutPage.jsx";
 import HowToUse from "./components/HowToUse/HowToUse.jsx";
 import ForgotPassword from "./components/ForgotPassword";
 import PasswordReset from "./components/PasswordReset";
+import Requests from "./components/Requests/reuests";
 import AdminPanel from "./components/AdminPanel/AdminPanel.jsx";
 
 function App() {
@@ -29,12 +30,13 @@ function App() {
       {userToken && <Navbar isAdmin={isAdmin} handleLogout={handleLogout} />}
       <Routes>
         {userToken && <Route path="/" exact element={<Main />} />}
-        {isAdmin && <Route path="/adminPanel" exact element={<AdminPanel />} /> }
+        {isAdmin && <Route path="/adminPanel" exact element={<AdminPanel />} />}
         <Route path="/Volunteers" exact element={<Volunteer />} />
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/login" exact element={<Login />} />
         <Route path="/" element={<Navigate replace to="/login" />} />
         <Route path="/contact" exact element={<Contact />} />
+        <Route path="/requests" exact element={<Requests />} />
         <Route path="/AboutPage" exact element={<AboutPage />} />
         <Route path="/HowToUse" exact element={<HowToUse />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

@@ -16,6 +16,13 @@ const Navbar = ({ handleLogout, isAdmin }) => {
         </li>
         <li>
           <div className="navbarworld">
+            <Link className="nav_link" to="requests">
+              <p>Requests</p>
+            </Link>
+          </div>
+        </li>
+        <li>
+          <div className="navbarworld">
             <Link to="/contact" className="nav_link">
               <p>Contact</p>
             </Link>
