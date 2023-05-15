@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 const Goals = () => {
   const [userEmail, setUserEmail] = useState('');
   const [currentWeight, setCurrentWeight] = useState('');
@@ -25,11 +26,16 @@ const Goals = () => {
     setExerciseDays(event.target.value);
   };
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
+  
   useEffect(() => {
     // Retrieve user's email from local storage
     const userEmail = localStorage.getItem('email');
     setUserEmail(userEmail);
-    console.log(userEmail);
+    //console.log(userEmail);
   }, []);
 
 
@@ -104,7 +110,7 @@ const Goals = () => {
           fontSize: '14px',
           cursor: 'pointer',
           marginRight: '20px',
-        }} type="submit">Save</button>
+        }} type="submit" onClick={handleRefresh}>Save</button>
       </form>
     </div>
   );

@@ -132,5 +132,33 @@ router.post("/setgoals", async (req, res) => {
 });
 
 
+router.get("/getgoals", async (req, res) => {
+  try {
+    //const { em } = req.query;
+    const em = req.query.email; // Retrieve the value of the 'email' query parameter
+    //const em = "salahqe@ac.sce.ac.il" ;
+    const user = await Goal.find({ em });
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    res.status(200).send({ message: "Goals retrieved successfully", goals: user });
+  } catch (error) {
+    console.error("Error retrieving goals:", error);
+    res.status(500).send({ message: "Internal server error" });
+  }
+});
+
+/*
+router.get("/allgoals", async (req, res) => {
+  try {
+    const users = await Goal.find({});
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+*/
 module.exports = router;
 

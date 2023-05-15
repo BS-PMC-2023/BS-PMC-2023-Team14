@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
-import Map from "../map";
 import "./styles.css";
 import Goalsdisplay from "../goalsDisplay";
 import Modal from "../Modal/Modal";
-
 const Main = ({ user }) => {
   const [users, setUsers] = useState([]);
   const [exercises, setExercises] = useState([]);
