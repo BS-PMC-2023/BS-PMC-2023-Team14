@@ -70,7 +70,6 @@ const Main = ({ user }) => {
             </div>
           ))}
         </div>
-      </div >
     </>
   );
 };
