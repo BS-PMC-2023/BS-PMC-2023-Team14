@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User, validate } = require("../models/user");
+const { Goal } = require("../models/goal");
 const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
@@ -34,6 +35,7 @@ router.get("/all", async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 router.get("/allVolunteer", async (req, res) => {
   try {
     const users = await User.find({ isVolunteer: true }); // Find users where isVolunteer is true
@@ -95,6 +97,40 @@ router.post("/toggle-volunteer", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
+
+// Set up the /setgoals route
+router.post("/setgoals", async (req, res) => {
+  try {
+    const { email, currentWeight, goalWeight, muscleGain, exerciseDays } = req.body;
+    const user = await Goal.findOne({ email });
+
+    if (!user) {
+      // If goal doesn't exist for the user, create a new one
+      const newGoal = new Goal({
+        email,
+        currentWeight,
+        goalWeight,
+        muscleGain,
+        exerciseDays,
+      });
+      await newGoal.save();
+    } else {
+      // If goal already exists, update the existing goal
+      user.currentWeight = currentWeight;
+      user.goalWeight = goalWeight;
+      user.muscleGain = muscleGain;
+      user.exerciseDays = exerciseDays;
+      await user.save();
+    }
+
+    return res.status(200).send({ message: "Goals set successfully" });
+  } catch (error) {
+    console.error("Error setting goals:", error);
+    return res.status(500).send({ message: "Internal server error" });
+  }
+});
+
 
 module.exports = router;
 

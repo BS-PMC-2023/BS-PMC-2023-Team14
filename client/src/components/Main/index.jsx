@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Navbar from "../Navbar/Navbar";
-import Map from "../map";
 import "../Main/styles.module.css"
-import Goals from "../setgoals.jsx"
 import Goalsdisplay from "../goalsDisplay"
 
 
@@ -33,7 +30,6 @@ const Main = ({ user }) => {
 
       <div className="mainDiv">
       <Goalsdisplay/>
-        <Goals/>
       </div>
     </>
   );

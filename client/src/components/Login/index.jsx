@@ -19,6 +19,8 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("isAdmin", res.data.isAdmin);
       localStorage.setItem("isVolunteer", res.data.isAdmin);
+      localStorage.setItem("email", data.email);
+
       window.location = "/";
     } catch (error) {
       if (
