@@ -137,7 +137,8 @@ router.get("/getgoals", async (req, res) => {
     //const { em } = req.query;
     const em = req.query.email; // Retrieve the value of the 'email' query parameter
     //const em = "salahqe@ac.sce.ac.il" ;
-    const user = await Goal.find({ em });
+    //console.log(em);
+    const user = await Goal.findOne({ email:em });
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
@@ -148,6 +149,27 @@ router.get("/getgoals", async (req, res) => {
     res.status(500).send({ message: "Internal server error" });
   }
 });
+
+router.delete("/deleteuser", async (req, res) => {
+  try {
+    const em = req.query.email;
+    const user = await User.deleteOne({ email:em });
+
+    // Check if the user was found and deleted
+    if (user.deletedCount === 1) {
+      // Send a success response
+      res.status(200).json({ message: "User deleted successfully" });
+    } else {
+      // User not found or not deleted
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    // Handle any errors
+    console.log("deleteUser error:", error);
+    res.status(500).json({ error: "An error occurred while deleting the user" });
+  }
+});
+
 
 /*
 router.get("/allgoals", async (req, res) => {

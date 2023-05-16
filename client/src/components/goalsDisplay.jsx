@@ -12,13 +12,20 @@ const GoalsDisplay = ({ currentWeight, goalWeight, dailyCalorieGoal, exerciseGoa
 
 
 
-  useEffect(async () => {
+  useEffect(() => {
     const userEmail = localStorage.getItem('email');
     setUserEmail(userEmail);
-    console.log(userEmail);
-    await fetchGoals()
   }, []);
 
+  useEffect(() => {
+    if (userEmail) {
+      fetchGoals();
+    }
+  }, [userEmail]);
+
+  useEffect(() => {
+    console.log(goals);
+  }, [goals]);
 
   const openPopup = () => {
     setPopupOpen(true);
@@ -31,64 +38,56 @@ const GoalsDisplay = ({ currentWeight, goalWeight, dailyCalorieGoal, exerciseGoa
 
   async function fetchGoals() {
     try {
+      console.log(userEmail)
       const params = new URLSearchParams([['email', userEmail]]);
-      const email = "userEmail"; // Replace with the actual user's email
-      const response = await axios.get('http://localhost:4000/api/users/getgoals',{params});
+      const response = await axios.get('http://localhost:4000/api/users/getgoals', { params });
+      //console.log(response.data.goals);
+      //savegoals(response.data.goals);
       setGoals(response.data.goals);
-      console.log(response.data.goals);
-      console.log(goals?.exerciseDays);
+      //console.log(goals);
+      //console.log(goals[1]);
+      //console.log(goals[1]?.exerciseDays);
     } catch (error) {
       console.log("fetchGoals: ", error);
     }
-  }
+  };
 
 
-
-
-  const currentWeightRef = React.useRef(null);
-  const goalWeightRef = React.useRef(null);
 
   return (
     <div className="goals-display-container">
-  <h2>My Goals</h2>
-  <div className="goals-display">
-    <div className="goal">
-      <div className="goal-label">Current Weight:</div>
-      <div className="goal-value" ref={currentWeightRef}>
-        {goals.length > 0 ? goals[0].currentWeight : ''} Kg
+      <h2>My Goals</h2>
+      <div className="goals-display">
+        <div className="goal">
+          <div className="goal-label">Current Weight:</div>
+          <div className="goal-value">{goals.currentWeight} Kg</div>
+        </div>
+        <div className="goal">
+          <div className="goal-label">Goal Weight:</div>
+          <div className="goal-value">{goals.goalWeight} Kg</div>
+        </div>
+        <div className="goal">
+          <div className="goal-label">Muscle Gain:</div>
+          <div className="goal-value">{goals.muscleGain} Kg</div>
+        </div>
+        <div className="goal">
+          <div className="goal-label">Training Days in a Week:</div>
+          <div className="goal-value">{goals.exerciseDays}</div>
+        </div>
       </div>
-    </div>
-    <div className="goal">
-      <div className="goal-label">Goal Weight:</div>
-      <div className="goal-value" ref={goalWeightRef}>
-        {goals.length > 0 ? goals[0].goalWeight : ''} Kg
-      </div>
-    </div>
-    <div className="goal">
-      <div className="goal-label">Muscle Gain:</div>
-      <div className="goal-value">
-        {goals.length > 0 ? goals[0].muscleGain : ''} Kg
-      </div>
-    </div>
-    <div className="goal">
-      <div className="goal-label">Training Days in a Week:</div>
-      <div className="goal-value">
-        {goals.length > 0 ? goals[0].exerciseDays : ''}
-      </div>
-    </div>
-  </div>
-  <div className="motivation-container">
-    <img src={weightImage} alt="Weight Loss" className="motivation-image" />
-    <Map />
-  </div>
 
-  <button className="setgoalsbutton" onClick={openPopup}>
-    Set Goals
-  </button>
+      <div className="motivation-container">
+        <img src={weightImage} alt="Weight Loss" className="motivation-image" />
+        <Map />
+      </div>
 
-  {isPopupOpen && <SetGoals closePopup={closePopup} />}
-  {isPopupOpen && <div className="popup-overlay" onClick={closePopup} />}
-</div>
+      <button className="setgoalsbutton" onClick={openPopup}>
+        Set Goals
+      </button>
+
+      {isPopupOpen && <SetGoals closePopup={closePopup} />}
+      {isPopupOpen && <div className="popup-overlay" onClick={closePopup} />}
+    </div>
 
 
   );
