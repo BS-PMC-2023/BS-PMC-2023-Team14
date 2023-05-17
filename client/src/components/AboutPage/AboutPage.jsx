@@ -19,10 +19,6 @@ function AboutPage() {
   return (
     <main>
       <body>
-        <header>
-          <h1>HealthFuel</h1>
-        </header>
-
         <main>
           <section id="about">
             <h2>About Us</h2>
@@ -53,14 +49,8 @@ function AboutPage() {
               causes of excess obesity and malnutrition, we can work towards
               creating a healthier and more equitable society.
             </p>
-
-            <img src="../images/photo1.png" alt="Image" />
           </section>
         </main>
-
-        <footer>
-          <p>&copy; 2023 HealthFuel. All rights reserved.</p>
-        </footer>
       </body>
     </main>
   );

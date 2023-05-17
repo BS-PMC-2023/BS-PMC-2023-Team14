@@ -182,5 +182,26 @@ router.get("/allgoals", async (req, res) => {
   }
 });
 */
+router.post("/AddRating", async (req, res) =>  {
+  try {
+    const { userId } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    if (user.isVolunteer) {
+      user.Rating += 1;
+    } else {
+      user.Rating=0;
+    }
+
+    await user.save();
+
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
 

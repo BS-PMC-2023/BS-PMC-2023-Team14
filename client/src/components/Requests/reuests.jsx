@@ -44,8 +44,6 @@ const Requests = () => {
     return (
         <form className="contantForm" ref={form} onSubmit={sendEmail}>
             <h1>Request to be a valnteer</h1>
-        
-
             Name:
             <label>
                 <input type="text" name="name" value={name} onChange={handleNameChange} className="contact-input" />

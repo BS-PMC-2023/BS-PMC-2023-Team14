@@ -1,68 +1,53 @@
 import "./Volunteers.css";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 function Volunteers() {
     const [users, setUsers] = useState([]);
-
+    
     useEffect(async () => {
-        await fetchAllUsers()
+        await fetchAllVolunteer()
     }, []);
 
-
-    async function handleAdmin(id) {
-        try {
-            const response = await axios.post("http://localhost:4000/api/users/toggle-admin", {
-                userId: id,
-            });
-            console.log("handleAdmin: ", response.data.message);
-        } catch (error) {
-            console.log("handleAdmin: ", error);
-        }
-        await fetchAllUsers();
-    }
-    async function handleVolunteer(id) {
-        try {
-            const response = await axios.post("http://localhost:4000/api/users/toggle-volunteer", {
-                userId: id,
-            });
-            console.log("handleVolunteer: ", response.data.message);
-        } catch (error) {
-            console.log("handleVolunteer: ", error);
-        }
-        await fetchAllUsers();
-    }
-
-    async function fetchAllUsers() {
+    async function fetchAllVolunteer() {
         try {
             const response = await axios.get("http://localhost:4000/api/users/allVolunteer");
             setUsers(response.data)
         } catch (error) {
-            console.log("fetchAllUsers: ", error);
+            console.log("fetchAllVolunteer: ", error);
         }
     }
 
+    async function AddRating(id) {
+     try {
+            const response = await axios.post("http://localhost:4000/api/users/AddRating", {
+                userId: id,
+            });
+            console.log("AddRating: ", response.data.message);
+        } catch (error) {
+            console.log("AddRating: ", error);
+        }
+        await fetchAllVolunteer();
+      }
     return (
-        <div>
-            <h1>Volunteers</h1>
-            <table className="users-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map(data => (
-                        <tr key={data._id}>
-                            <td>{data.firstName}</td>
-                            <td>{data.email}</td>
-                        </tr>
-                    ))}
-                </tbody>
-                
-            </table>
-        </div>
+         <div className="volunteers">
+         <div className="card-container">
+           {users.map(data => (
+             <div className="card" key={data._id}>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Person_icon_BLACK-01.svg"/>  
+               <h2>Name: {data.firstName}</h2>
+               <p>Email: {data.email}</p>
+               <p>Rate: {data.Rating}</p>
+               <Link to={'/Rate/${data._id}'}>
+               <p>Rating</p>
+               </Link>
+               <button onClick={() => AddRating(data._id)}>
+                                   Add</button>
+             </div>
+           ))}
+         </div>
+       </div>
     );
 }
 

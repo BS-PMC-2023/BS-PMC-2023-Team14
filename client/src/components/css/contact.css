@@ -1,12 +1,13 @@
 .contantForm {
     height: 50%;
-    margin-top: 5%;
-    margin-left: 30%;
+    margin-top: 10%;
+    margin-left: 20%;
     margin-right: 30%;
     background-image: url('../images/helpcenter.png');
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 15%;
+    
 }
 
 form {
@@ -22,7 +23,7 @@ form {
 
 
 h2 {
-    margin-top: 0;
+    margin-top: 10px;
 }
 
 label {

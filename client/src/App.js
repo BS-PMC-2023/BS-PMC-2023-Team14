@@ -11,6 +11,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import PasswordReset from "./components/PasswordReset";
 import Requests from "./components/Requests/reuests";
 import AdminPanel from "./components/AdminPanel/AdminPanel.jsx";
+import Rate from "./components/Rating/index.jsx";
 
 function App() {
   const isAdmin = localStorage.getItem("isAdmin");
@@ -41,6 +42,7 @@ function App() {
         <Route path="/HowToUse" exact element={<HowToUse />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/password-reset/:id/:token" element={<PasswordReset />} />
+        <Route path="/Rate/:email" exact element={<Rate />} />
       </Routes>
     </BrowserRouter>
   );
