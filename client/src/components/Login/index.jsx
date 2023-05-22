@@ -38,7 +38,7 @@ const Login = () => {
       <div className={styles.login_form_container}>
         <div className={styles.left}>
           <form className={styles.form_container} onSubmit={handleSubmit}>
-            <h1 style={{color: '#3bb19b'}} >Login to Your Account</h1>
+            <h1 style={{ color: '#3bb19b' }} >Login to Your Account</h1>
             <input
               type="email"
               placeholder="Email"

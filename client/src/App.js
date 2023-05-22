@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Contact from "./components/Contact/contact";
 import Navbar from "./components/Navbar/Navbar";
 import Volunteer from "./components/Volunteer/Volunteers.jsx";
+import Profile from "./components/Profile/index.jsx";
 import AboutPage from "./components/AboutPage/AboutPage.jsx";
 import HowToUse from "./components/HowToUse/HowToUse.jsx";
 import ForgotPassword from "./components/ForgotPassword";
@@ -33,6 +34,7 @@ function App() {
         {userToken && <Route path="/" exact element={<Main />} />}
         {isAdmin && <Route path="/adminPanel" exact element={<AdminPanel />} />}
         <Route path="/Volunteers" exact element={<Volunteer />} />
+        <Route path="/profile" exact element={<Profile />} />
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/login" exact element={<Login />} />
         <Route path="/" element={<Navigate replace to="/login" />} />

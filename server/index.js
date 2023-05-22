@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const connection = require("./db");
-const userRoutes = require("./routes/users");
+const usersRoutes = require("./routes/users");
+const userRoutes = require("./routes/user");
 const authRoutes = require("./routes/auth");
 const passwordResetRoutes = require("./routes/passwordReset");
 const exercisesRoutes = require("./routes/exercises");
@@ -28,7 +29,8 @@ app.use(function (req, res, next) {
 
 // routes
 app.use("/api/exercises", exercisesRoutes);
-app.use("/api/users", userRoutes);
+app.use("/api/users", usersRoutes);
+app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/password-reset", passwordResetRoutes);
 

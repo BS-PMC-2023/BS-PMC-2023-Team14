@@ -10,7 +10,10 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
   isVolunteer: { type: Boolean, default: false },
-  Rating: { type: Number, default: 0 },
+  ratedBy: { type: [String], default: [] },
+  ratings: { type: [Number], default: [] },
+  comments: { type: [String], default: [] },
+
 });
 
 
