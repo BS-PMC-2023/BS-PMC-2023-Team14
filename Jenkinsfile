@@ -8,25 +8,34 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                dir('client') {
+                    sh 'npm install'
+                }
+                dir('server') {
+                    sh 'npm install'
+                }
             }
         }
-        stage('Test') {
+        stage('Run Tests') {
             steps {
-                sh 'chmod -R 777 node_modules'
-                sh 'npm test'
+                dir('client') {
+                    sh 'npm run test.js'
+                }
             }
         }
         stage('Code Coverage') {
-        steps {
-            sh 'npm t -- --coverage'
-        }
+            steps {
+                dir('client') {
+                    sh 'npm t -- --coverage'
+                }
+                dir('server') {
+                    sh 'npm t -- --coverage'
+                }
+            }
         }
         stage('Deliver') {
             steps {
-
-              echo 'Finished using the web site'
-
+                echo 'Finished using the web site'
             }
         }
     }
