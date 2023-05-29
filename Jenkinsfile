@@ -17,3 +17,17 @@ pipeline {
                 sh 'npm test'
             }
         }
+        stage('Code Coverage') {
+        steps {
+            sh 'npm t -- --coverage'
+        }
+        }
+        stage('Deliver') {
+            steps {
+
+              echo 'Finished using the web site'
+
+            }
+        }
+    }
+}
