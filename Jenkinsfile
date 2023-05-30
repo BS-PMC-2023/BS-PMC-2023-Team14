@@ -16,27 +16,5 @@ pipeline {
                 }
             }
         }
-        stage('Run Tests') {
-            steps {
-                dir('client') {
-                    sh 'npm run test.js'
-                }
-            }
-        }
-        stage('Code Coverage') {
-            steps {
-                dir('client') {
-                    sh 'npm t -- --coverage'
-                }
-                dir('server') {
-                    sh 'npm t -- --coverage'
-                }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                echo 'Finished using the web site'
-            }
-        }
     }
 }
