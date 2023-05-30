@@ -1,23 +1,7 @@
-stages {
-    stage('Build') {
-        steps {
-            dir('client') {
-                sh 'npm install'
-            }
-            dir('server') {
-                sh 'npm install'
+stage('Test') {
+            steps {
+                sh 'chmod -R 777 node_modules'
+                sh 'npm test'
             }
         }
-    }
-    
-    stage('Integration Test') {
-        steps {
-            dir('client') {
-                sh 'npm run test'
-            }
-            dir('server') {
-                sh 'npm run test'
-            }
-        }
-    }
-}
+       
