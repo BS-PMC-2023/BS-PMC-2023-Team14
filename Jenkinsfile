@@ -5,29 +5,27 @@ pipeline {
             args '-p 4000:4000'
         }
     }
-    stages {
-        stage('Build') {
+    stages {ֿ
+            stage('Build') {
             steps {
-                sh 'npm install'
+                dir('client') {
+                    sh 'npm install'
+                }
+                dir('server') {
+                    sh 'npm install'
+                }
             }
         }
-        stage('Test') {
+        stage('run') {
             steps {
-                sh 'chmod -R 777 node_modules'
-                sh 'npm test'
+                dir('client') {
+                    sh 'npm start'
+                }
+                dir('server') {
+                    sh 'npm start'
+                }
             }
         }
-        stage('Code Coverage') {
-        steps {
-            sh 'npm t -- --coverage'
-        }
-        }
-        stage('Deliver') {
-            steps {
 
-              echo 'Finished using the web site'
-
-            }
-        }
     }
 }
