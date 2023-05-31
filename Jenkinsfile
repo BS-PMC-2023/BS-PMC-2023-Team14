@@ -21,7 +21,7 @@ pipeline {
 
         stage('Start Server') {
             steps {
-                cd('server') {
+                dir('server') {
                     sh '''
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
@@ -35,7 +35,7 @@ pipeline {
 
         stage('Start Client') {
             steps {
-                cd('client') {
+                dir('client') {
                     sh '''
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
