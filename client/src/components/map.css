@@ -9,3 +9,10 @@
 .map {
   height: 80vh;
 }
+
+
+.marker {
+  background-size: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}

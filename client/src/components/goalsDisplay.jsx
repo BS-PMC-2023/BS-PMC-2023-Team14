@@ -40,7 +40,7 @@ const GoalsDisplay = ({ currentWeight, goalWeight, dailyCalorieGoal, exerciseGoa
     try {
       console.log(userEmail)
       const params = new URLSearchParams([['email', userEmail]]);
-      const response = await axios.get('http://localhost:4000/api/users/getgoals', { params });
+      const response = await axios.get('http://localhost:4000/api/user/getgoals', { params });
       //console.log(response.data.goals);
       //savegoals(response.data.goals);
       setGoals(response.data.goals);

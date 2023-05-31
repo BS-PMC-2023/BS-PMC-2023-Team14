@@ -44,7 +44,7 @@ const Goals = () => {
 
     console.log(userEmail, currentWeight, goalWeight, muscleGain, exerciseDays);
     try {
-      const response = await axios.post("http://localhost:4000/api/users/setgoals", {
+      const response = await axios.post("http://localhost:4000/api/user/setgoals", {
         email: userEmail,
         currentWeight: currentWeight,
         goalWeight: goalWeight,

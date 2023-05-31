@@ -25,7 +25,7 @@ function AdminPanel() {
         console.log(em);
         try {
             const params = new URLSearchParams([['email', em]]);
-            const response = await axios.delete('http://localhost:4000/api/users/deleteuser', { params });
+            const response = await axios.delete('http://localhost:4000/api/user/deleteuser', { params });
             console.log("deleteuser: ", response.data.message);
         } catch (error) {
             console.log("deleteuser: ", error);
