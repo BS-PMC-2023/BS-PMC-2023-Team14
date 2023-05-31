@@ -18,7 +18,8 @@ const Navbar = ({ handleLogout, isAdmin }) => {
             {isAdmin === 'true' &&
               <li><a href="/adminPanel" >Admin Panel</a></li>
             }
-            <li><button className="white_btn" onClick={handleLogout}>
+            <li><button className="white_btn" onClick={handleLogout} data-testid="logout-button"
+            >
               Logout
             </button>
             </li>

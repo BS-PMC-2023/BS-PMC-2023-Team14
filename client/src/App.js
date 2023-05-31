@@ -19,11 +19,8 @@ function App() {
 
   const userToken = localStorage.getItem("token");
 
-  const isVolunteer = localStorage.getItem("token");
-
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("isAdmin");
+    localStorage.clear();
     window.location = "/";
   };
 

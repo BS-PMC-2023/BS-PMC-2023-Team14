@@ -55,7 +55,7 @@ const Main = ({ user }) => {
             onClick={() => showModal(data)}
           >
             <h3>{data.exercise_name}</h3>
-            <div className="video-container">
+            <div className="video-container" data-testid="video-container">
               <video width="320" height="240" controls>
                 (
                 {data.videoURL.map((url, index) => (

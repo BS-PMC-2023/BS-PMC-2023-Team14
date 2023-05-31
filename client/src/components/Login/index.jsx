@@ -47,6 +47,7 @@ const Login = () => {
               value={data.email}
               required
               className={styles.input}
+              data-testid="email"
             />
             <input
               type="password"
@@ -63,7 +64,7 @@ const Login = () => {
             </Link>
 
             {error && <div className={styles.error_msg}>{error}</div>}
-            <button type="submit" className={styles.green_btn}>
+            <button type="submit" className={styles.green_btn} data-testid="login-button">
               Sign In
             </button>
           </form>

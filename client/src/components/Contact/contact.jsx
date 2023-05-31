@@ -62,7 +62,7 @@ const Contact = () => {
             <label>
                 <textarea name="message" value={message} onChange={handleMessageChange} className="contact-textarea" />
             </label>
-            <button type="submit" className="contact-button">Send</button>
+            <button type="submit" className="contact-button" data-testid="contact-button">Send</button>
             {status && <div>{status}</div>}
         </form>
     );
