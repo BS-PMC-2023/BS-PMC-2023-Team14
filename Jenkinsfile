@@ -26,7 +26,7 @@ pipeline {
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                             export DB = mongodb+srv://admin:admin123@cluster0.nswvsqy.mongodb.net/test;
-                            exportJWTPRIVATEKEY=123;
+                            export JWTPRIVATEKEY=123;
                         npm start
                     '''
                 }
