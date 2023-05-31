@@ -61,7 +61,7 @@ const puppeteer = require('puppeteer');
 
 
     console.log('');
-    console.log(`Test Video containers..`);//הולכים ל home bage נבדוק שיש לנו שיש את ה סרטונים
+    console.log(`Test Video containers..`);//הולכים ל home bage נבדוק שיש לנו את ה סרטונים
     await page.goto(`http://localhost:3000/`, {
         waitUntil: "domcontentloaded",
     });
