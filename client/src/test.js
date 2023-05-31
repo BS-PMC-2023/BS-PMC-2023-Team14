@@ -16,7 +16,7 @@ const puppeteer = require('puppeteer');
         '/HowToUse',
     ];
 
-    const timeOutInMs = 5000
+    const timeOutInMs = 10000
 
     console.log(`Test Sign up..`);
     await page.goto(`http://localhost:3000/signup`, {
@@ -35,10 +35,10 @@ const puppeteer = require('puppeteer');
     await page.goto(`http://localhost:3000/login`, {
         waitUntil: "domcontentloaded",
     });
-    await page.type('input[name=email]', 'nethanielmaoz@gmail.com');
-    await page.type('input[name=password]', 'nN!12345678');
+    await page.type('input[name=email]', 'maryam19455@gmail.com');
+    await page.type('input[name=password]', 'Maryam@90');
     await page.click('button[data-testid="login-button"]');
-    await page.waitForNavigation();
+    await page.waitForNavigation();//מחכה ל שינוי עמוד
     console.log(`Logged in successfully.`);
 
 
@@ -61,7 +61,7 @@ const puppeteer = require('puppeteer');
 
 
     console.log('');
-    console.log(`Test Video containers..`);
+    console.log(`Test Video containers..`);//הולכים ל home bage נבדוק שיש לנו שיש את ה סרטונים
     await page.goto(`http://localhost:3000/`, {
         waitUntil: "domcontentloaded",
     });
@@ -125,7 +125,7 @@ const puppeteer = require('puppeteer');
     await page.goto(`http://localhost:3000/volunteers`, {
         waitUntil: "domcontentloaded",
     });
-    isVolunteers = false;
+    let isVolunteers = false;
     try {
         await page.waitForSelector('div[data-testid="card"]', { timeout: timeOutInMs });
         const volunteers = await page.$$('div[data-testid="card"]');
@@ -165,7 +165,7 @@ const puppeteer = require('puppeteer');
     await page.goto(`http://localhost:3000/`, {
         waitUntil: "domcontentloaded",
     });
-    isLoggedOut = false;
+    let isLoggedOut = false;
     await page.click('[data-testid="logout-button"]');
     try {
         await page.waitForSelector('button[data-testid="logout-button"]', { timeout: timeOutInMs });
@@ -180,7 +180,7 @@ const puppeteer = require('puppeteer');
 
 
 
-    await browser.close();
+    await browser.close();// סוגר את ה browser
 })();
 
 
