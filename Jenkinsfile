@@ -15,23 +15,6 @@ stages {
             dir('server') {
                 sh 'npm start'
         }
-
-    }
-
-    stage('Start Client') {
-        steps {
-            dir('client') {
-                sh 'npm start'
-            }
-        }
-    }
-    
-    stage('Integration Test') {
-        steps {
-            dir('client') {
-                sh 'npm run test'
-            }
-        }
     }
 
     stage('Start Client') {
