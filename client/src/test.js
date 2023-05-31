@@ -108,7 +108,7 @@ const puppeteer = require('puppeteer');
     let isRequest = false
     await page.type('input[name=name]', 'my name');
     await page.type('input[name=email]', 'testemail@gmail.com');
-    await page.type('textarea[name=message]', 'test message');
+    await page.type('textarea[name=message]', 'Maryam is here');
     await page.click('button[data-testid="contact-button"]');
     page.on('console', msg => msg.text() == "message sent" ? isRequest = true : isRequest = false);
     await timeOut(timeOutInMs);

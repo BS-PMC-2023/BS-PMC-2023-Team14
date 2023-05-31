@@ -2,21 +2,31 @@ pipeline {
     agent any
 
     stages {
-        stage('Install') {
+        stage('Install Node.js and dependencies') {
             steps {
-                dir('client') {
-                    sh 'npm install'
-                }
-                dir('server') {
-                    sh 'npm install'
-                }
+                sh '''
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                    nvm install node
+                    node --version
+                    npm --version
+
+                    cd client
+                    npm install
+                    cd ../server
+                    npm install
+                '''
             }
         }
 
         stage('Start Server') {
             steps {
                 dir('server') {
-                    sh 'npm start'
+                    sh '''
+                        export NVM_DIR="$HOME/.nvm"
+                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                        npm start
+                    '''
                 }
             }
         }
@@ -24,7 +34,23 @@ pipeline {
         stage('Start Client') {
             steps {
                 dir('client') {
-                    sh 'npm start'
+                    sh '''
+                        export NVM_DIR="$HOME/.nvm"
+                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                        npm start
+                    '''
+                }
+            }
+        }
+
+        stage('Start Integration Tests') {
+            steps {
+                dir('client') {
+                    sh '''
+                        export NVM_DIR="$HOME/.nvm"
+                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                        npm run test
+                    '''
                 }
             }
         }
