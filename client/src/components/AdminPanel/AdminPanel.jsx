@@ -11,7 +11,7 @@ function AdminPanel() {
 
     async function handleAdmin(id) {
         try {
-            const response = await axios.post("http://localhost:4000/api/users/toggle-admin", {
+            const response = await axios.post("http://localhost:4000/api/user/toggle-admin", {
                 userId: id,
             });
             console.log("handleAdmin: ", response.data.message);
@@ -35,7 +35,7 @@ function AdminPanel() {
 
     async function handleVolunteer(id) {
         try {
-            const response = await axios.post("http://localhost:4000/api/users/toggle-volunteer", {
+            const response = await axios.post("http://localhost:4000/api/user/toggle-volunteer", {
                 userId: id,
             });
             console.log("handleVolunteer: ", response.data.message);

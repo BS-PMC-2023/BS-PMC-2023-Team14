@@ -15,6 +15,7 @@
     "leaflet-geosearch": "^3.8.0",
     "maplibre-gl": "^2.4.0",
     "openai": "^3.2.1",
+    "puppeteer": "^20.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.8.0",
@@ -28,7 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "node src/test.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
   }
 }

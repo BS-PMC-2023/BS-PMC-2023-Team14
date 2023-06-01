@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import StarRatings from 'react-star-ratings';
-Modal.setAppElement('#root');
 
 function Volunteers() {
     const email = localStorage.getItem("email");
@@ -21,6 +20,7 @@ function Volunteers() {
     }, []);
 
     async function fetchAllVolunteer() {
+
         try {
             const response = await axios.get("http://localhost:4000/api/users/allVolunteer");
             console.log("fetchAllVolunteer:", response.data);
@@ -78,7 +78,7 @@ function Volunteers() {
             </Modal>
             <div className="card-container">
                 {users.map(data => (
-                    <div className="card" key={data._id}>
+                    <div className="card" data-testid="card" key={data._id}>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Person_icon_BLACK-01.svg" />
                         <h2>Name: {data.firstName}</h2>
                         <p>Email: {data.email}</p>

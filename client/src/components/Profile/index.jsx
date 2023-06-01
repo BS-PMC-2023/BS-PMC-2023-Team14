@@ -44,6 +44,7 @@ function Profile() {
 
         try {
             const response = await axios.put(`http://localhost:4000/api/user/id/${userId}`, userToUpdate);
+            console.log(response.data.message);
             alert(response.data.message);
             setUser(response.data);
         } catch (error) {
@@ -58,17 +59,17 @@ function Profile() {
                     <h2>Edit Profile</h2>
                     <div className="form-group">
                         <label htmlFor="firstName">First Name:</label>
-                        <input id="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                        <input id="firstName" name="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="lastName">Last Name:</label>
-                        <input id="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                        <input id="lastName" name="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="volunteer">Volunteer:</label>
-                        <input type="checkbox" id="volunteer" checked={volunteer} onChange={(e) => setVolunteer(e.target.checked)} />
+                        <input type="checkbox" name="volunteer" id="volunteer" checked={volunteer} onChange={(e) => setVolunteer(e.target.checked)} />
                     </div>
-                    <button onClick={updateUser}>OK</button>
+                    <button data-testid="edit-button" id="edit-button" onClick={updateUser}>OK</button>
                 </div>
             </div>
         </div>
