@@ -40,7 +40,8 @@ pipeline {
                     sh '''
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                        npm start
+                        nohup npm start > output.log 2>&1 &
+                        sleep 5
                     '''
                 }
             }
