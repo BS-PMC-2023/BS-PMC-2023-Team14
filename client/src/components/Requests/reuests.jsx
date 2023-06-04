@@ -87,7 +87,7 @@ const Requests = () => {
               />
             </div>
             <button
-              type="submit"
+              type="submit" name="Request-button"
             >
               Send
             </button>
