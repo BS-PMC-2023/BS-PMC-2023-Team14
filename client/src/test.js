@@ -185,25 +185,24 @@ const puppeteer = require('puppeteer');
     await browser.close();// סוגר את ה browser
 })();
 
-/*hakton
+//hakton
+console.log('');
+console.log(`Test Requests page..`);
+await page.goto(`http://localhost:3000/reuests`, {
+ waitUntil: "domcontentloaded",
+    });
 
-console.log(`NEW Test Requests page..`);
-await page.goto(`http://localhost:3000/contact`, {
-    waitUntil: "domcontentloaded",
-});
+ let isRequest = false
+    await page.type('textarea[name=message]', 'Maryam is here');
+    await page.click('button[data-testid="contact-button"]');
+    page.on('console', msg => msg.text() == "message sent" ? isRequest = true : isRequest = false);
+    await timeOut(timeOutInMs);
+    if (!isRequest) {
+        console.log(`Failed to sent.`);
+        process.exit()
+    }
+    console.log(`Request sent successfully.`);               
+   
 
-let isNewRequest = false
-await page.type('textarea[name=message]', 'Maryam is here');
-await page.click('button[data-testid="contact-button"]');
-page.on('console', msg => msg.text() == "message sent" ? isNewRequest = true : isNewRequest = false);
-await timeOut(timeOutInMs);
-if (!isNewRequest) {
-    console.log(`Failed to sent.`);
-    process.exit()
-}
-console.log(`Request sent successfully.`);
-
-
-*/
 
 const timeOut = (m) => new Promise(resolve => setTimeout(resolve, m));
