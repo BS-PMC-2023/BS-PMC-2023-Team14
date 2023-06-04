@@ -33,6 +33,21 @@ const Goals = () => {
     window.location.reload();
   };
 
+  const calculateExerciseDays = (weight, height) => {
+    // Calculation logic here.
+    // This is a simple placeholder calculation, replace with your actual logic.
+    const bmi = weight / ((height / 100) ** 2);
+    let recommendedDays = 3; // Default
+    if (bmi < 18.5) {
+      recommendedDays = 3;
+    } else if (bmi >= 18.5 && bmi <= 24.9) {
+      recommendedDays = 4;
+    } else if (bmi >= 25) {
+      recommendedDays = 5;
+    }
+    return recommendedDays;
+  };
+
   useEffect(() => {
     // Retrieve user's email from local storage
     const userEmail = localStorage.getItem("email");
@@ -43,14 +58,9 @@ const Goals = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(
-      userEmail,
-      currentWeight,
-      currentLength,
-      goalWeight,
-      muscleGain,
-      exerciseDays
-    );
+    const calculatedExerciseDays = calculateExerciseDays(currentWeight, currentLength);
+
+  console.log(userEmail, currentWeight, goalWeight, muscleGain, calculatedExerciseDays);
     try {
       const response = await axios.post(
         "http://localhost:4000/api/user/setgoals",
@@ -60,7 +70,7 @@ const Goals = () => {
           currentLength: currentLength,
           goalWeight: goalWeight,
           muscleGain: muscleGain,
-          exerciseDays: exerciseDays,
+          exerciseDays: calculatedExerciseDays,
         }
       );
 
@@ -84,7 +94,7 @@ const Goals = () => {
         </label>
         <br />
         <label>
-          Current Length:
+          Height:
           <input
             type="double"
             value={currentLength}
@@ -110,14 +120,7 @@ const Goals = () => {
           />
         </label>
         <br />
-        <label>
-          Exercise days:
-          <input
-            type="number"
-            value={exerciseDays}
-            onChange={handleExerciseDaysChange}
-          />
-        </label>
+        
         <br />
         <button
           style={{
