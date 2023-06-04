@@ -188,20 +188,25 @@ const puppeteer = require('puppeteer');
 ////hakton
 
 console.log('');
-    console.log(`Test Requests page..`);
-    await page.goto(`http://localhost:3000/reuests`, {
-        waitUntil: "domcontentloaded",
-    });
+console.log(`Test Requests page..`);
+await page.goto(`http://localhost:3000/contact`, {
+    waitUntil: "domcontentloaded",
+});
 
-let is_newRequest = false
+let isNewRequest = false
+await page.type('input[name=name]', 'my name');
+await page.type('input[name=email]', 'testemail@gmail.com');
 await page.type('textarea[name=message]', 'Maryam is here');
-await page.click('button[data-testid="Request-button"]');
-page.on('console', msg => msg.text() == "message sent" ? is_newRequest = true : is_newRequest = false);
+await page.click('button[data-testid="contact-button"]');
+page.on('console', msg => msg.text() == "message sent" ? isNewRequest = true : isNewRequest = false);
 await timeOut(timeOutInMs);
-if (!is_newRequest) {
+if (!isNewRequest) {
     console.log(`Failed to sent.`);
     process.exit()
 }
 console.log(`Request sent successfully.`);
+
+
+/////
 
 const timeOut = (m) => new Promise(resolve => setTimeout(resolve, m));
