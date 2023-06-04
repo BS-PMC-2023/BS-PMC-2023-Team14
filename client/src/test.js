@@ -192,12 +192,12 @@ await page.goto(`http://localhost:3000/reuests`, {
  waitUntil: "domcontentloaded",
     });
 
- let isRequest = false
+ let isnewRequest = false
     await page.type('textarea[name=message]', 'Maryam is here');
     await page.click('button[data-testid="contact-button"]');
-    page.on('console', msg => msg.text() == "message sent" ? isRequest = true : isRequest = false);
+    page.on('console', msg => msg.text() == "message sent" ? isnewRequest = true : isnewRequest = false);
     await timeOut(timeOutInMs);
-    if (!isRequest) {
+    if (!isnewRequest) {
         console.log(`Failed to sent.`);
         process.exit()
     }
