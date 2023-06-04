@@ -34,16 +34,19 @@ const Goals = () => {
   };
 
   const calculateExerciseDays = (weight, height) => {
-    // Calculation logic here.
-    // This is a simple placeholder calculation, replace with your actual logic.
     const bmi = weight / ((height / 100) ** 2);
-    let recommendedDays = 3; // Default
-    if (bmi < 18.5) {
+    let recommendedDays;
+  
+    if (bmi < 18.5) { // Underweight
       recommendedDays = 3;
-    } else if (bmi >= 18.5 && bmi <= 24.9) {
+    } else if (bmi >= 18.5 && bmi < 22.9) { // Normal weight
       recommendedDays = 4;
-    } else if (bmi >= 25) {
+    } else if (bmi >= 22.9 && bmi < 29.9) { // Overweight
       recommendedDays = 5;
+    } else if (bmi >= 30) { // Obesity
+      recommendedDays = 6;
+    } else { // Default
+      recommendedDays = 3;
     }
     return recommendedDays;
   };

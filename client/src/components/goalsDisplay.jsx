@@ -78,7 +78,7 @@ const GoalsDisplay = ({
           <div className="goal-value">{goals.currentWeight} Kg</div>
         </div>
         <div className="goal">
-          <div className="goal-label">Current Length:</div>
+          <div className="goal-label">Height:</div>
           <div className="goal-value">{goals.currentLength} Cm</div>
         </div>
         <div className="goal">
@@ -88,10 +88,6 @@ const GoalsDisplay = ({
         <div className="goal">
           <div className="goal-label">Muscle Gain:</div>
           <div className="goal-value">{goals.muscleGain} Kg</div>
-        </div>
-        <div className="goal">
-          <div className="goal-label">Training Days in a Week:</div>
-          <div className="goal-value">{goals.exerciseDays}</div>
         </div>
         <div className="goal">
           <div className="goal-label">Training Days in a Week:</div>
