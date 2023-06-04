@@ -60,7 +60,8 @@ const GoalsDisplay = ({
 
   function calculateBMI(weight, height) {
     // Calculate BMI using the formula: weight / (height * height)
-    const bmi = weight / (height * height);
+    let height1 = height / 100;
+    const bmi = weight / (height1 * height1);
 
     // Round the BMI value to two decimal places
     const roundedBMI = bmi.toFixed(2);
