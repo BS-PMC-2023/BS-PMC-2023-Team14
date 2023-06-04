@@ -103,7 +103,7 @@ const puppeteer = require('puppeteer');
 
     console.log('');
     console.log(`Test Requests page..`);
-    await page.goto(`http://localhost:3000/contact`, {
+    await page.goto(`http://localhost:3000/reuests`, {
         waitUntil: "domcontentloaded",
     });
 
@@ -185,7 +185,7 @@ const puppeteer = require('puppeteer');
     await browser.close();// סוגר את ה browser
 })();
 
-////hakton
+/*hakton
 
 console.log(`NEW Test Requests page..`);
 await page.goto(`http://localhost:3000/contact`, {
@@ -204,6 +204,6 @@ if (!isNewRequest) {
 console.log(`Request sent successfully.`);
 
 
-/////
+*/
 
 const timeOut = (m) => new Promise(resolve => setTimeout(resolve, m));
