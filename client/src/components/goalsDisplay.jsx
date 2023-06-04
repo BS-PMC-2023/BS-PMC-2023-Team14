@@ -58,6 +58,16 @@ const GoalsDisplay = ({
     }
   }
 
+  function calculateBMI(weight, height) {
+    // Calculate BMI using the formula: weight / (height * height)
+    const bmi = weight / (height * height);
+
+    // Round the BMI value to two decimal places
+    const roundedBMI = bmi.toFixed(2);
+
+    return roundedBMI;
+  }
+
   return (
     <div className="goals-display-container">
       <h2>My Goals</h2>
@@ -81,6 +91,16 @@ const GoalsDisplay = ({
         <div className="goal">
           <div className="goal-label">Training Days in a Week:</div>
           <div className="goal-value">{goals.exerciseDays}</div>
+        </div>
+        <div className="goal">
+          <div className="goal-label">Training Days in a Week:</div>
+          <div className="goal-value">{goals.exerciseDays}</div>
+        </div>
+        <div className="goal">
+          <div className="goal-label">Body Mass Index - BMI:</div>
+          <div className="goal-value">
+            {calculateBMI(goals.currentWeight, goals.currentLength)}
+          </div>
         </div>
       </div>
 
