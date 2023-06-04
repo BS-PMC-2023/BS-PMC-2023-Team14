@@ -33,6 +33,24 @@ const Goals = () => {
     window.location.reload();
   };
 
+  const calculateExerciseDays = (weight, height) => {
+    const bmi = weight / ((height / 100) ** 2);
+    let recommendedDays;
+  
+    if (bmi < 18.5) { // Underweight
+      recommendedDays = 3;
+    } else if (bmi >= 18.5 && bmi < 22.9) { // Normal weight
+      recommendedDays = 4;
+    } else if (bmi >= 22.9 && bmi < 29.9) { // Overweight
+      recommendedDays = 5;
+    } else if (bmi >= 30) { // Obesity
+      recommendedDays = 6;
+    } else { // Default
+      recommendedDays = 3;
+    }
+    return recommendedDays;
+  };
+
   useEffect(() => {
     // Retrieve user's email from local storage
     const userEmail = localStorage.getItem("email");
@@ -43,14 +61,9 @@ const Goals = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(
-      userEmail,
-      currentWeight,
-      currentLength,
-      goalWeight,
-      muscleGain,
-      exerciseDays
-    );
+    const calculatedExerciseDays = calculateExerciseDays(currentWeight, currentLength);
+
+  console.log(userEmail, currentWeight, goalWeight, muscleGain, calculatedExerciseDays);
     try {
       const response = await axios.post(
         "http://localhost:4000/api/user/setgoals",
@@ -60,7 +73,7 @@ const Goals = () => {
           currentLength: currentLength,
           goalWeight: goalWeight,
           muscleGain: muscleGain,
-          exerciseDays: exerciseDays,
+          exerciseDays: calculatedExerciseDays,
         }
       );
 
@@ -84,7 +97,7 @@ const Goals = () => {
         </label>
         <br />
         <label>
-          Current Length:
+          Height:
           <input
             type="double"
             value={currentLength}
@@ -110,14 +123,7 @@ const Goals = () => {
           />
         </label>
         <br />
-        <label>
-          Exercise days:
-          <input
-            type="number"
-            value={exerciseDays}
-            onChange={handleExerciseDaysChange}
-          />
-        </label>
+        
         <br />
         <button
           style={{
