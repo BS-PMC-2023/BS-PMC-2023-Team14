@@ -13,7 +13,7 @@ router.get("/email/:email", async (req, res) => {
     res.json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 });
 
@@ -22,7 +22,9 @@ router.put("/id/:id", async (req, res) => {
     const { firstName, lastName, isVolunteer } = req.body;
     const user = await User.findById(req.params.id);
     if (!user)
-      return res.status(404).send({ message: "User with given ID doesn't exist!" });
+      return res
+        .status(404)
+        .send({ message: "User with given ID doesn't exist!" });
     user.firstName = firstName;
     user.lastName = lastName;
     user.isVolunteer = isVolunteer;
@@ -86,11 +88,17 @@ router.post("/toggle-volunteer", async (req, res) => {
   }
 });
 
-
 // Set up the /setgoals route
 router.post("/setgoals", async (req, res) => {
   try {
-    const { email, currentWeight, goalWeight, muscleGain, exerciseDays } = req.body;
+    const {
+      email,
+      currentWeight,
+      currentLength,
+      goalWeight,
+      muscleGain,
+      exerciseDays,
+    } = req.body;
     const user = await Goal.findOne({ email });
 
     if (!user) {
@@ -98,6 +106,7 @@ router.post("/setgoals", async (req, res) => {
       const newGoal = new Goal({
         email,
         currentWeight,
+        currentLength,
         goalWeight,
         muscleGain,
         exerciseDays,
@@ -106,6 +115,7 @@ router.post("/setgoals", async (req, res) => {
     } else {
       // If goal already exists, update the existing goal
       user.currentWeight = currentWeight;
+      user.currentLength = currentLength;
       user.goalWeight = goalWeight;
       user.muscleGain = muscleGain;
       user.exerciseDays = exerciseDays;
@@ -119,7 +129,6 @@ router.post("/setgoals", async (req, res) => {
   }
 });
 
-
 router.get("/getgoals", async (req, res) => {
   try {
     //const { em } = req.query;
@@ -131,7 +140,9 @@ router.get("/getgoals", async (req, res) => {
       return res.status(404).send({ message: "User not found" });
     }
 
-    res.status(200).send({ message: "Goals retrieved successfully", goals: user });
+    res
+      .status(200)
+      .send({ message: "Goals retrieved successfully", goals: user });
   } catch (error) {
     console.error("Error retrieving goals:", error);
     res.status(500).send({ message: "Internal server error" });
@@ -154,10 +165,11 @@ router.delete("/deleteuser", async (req, res) => {
   } catch (error) {
     // Handle any errors
     console.log("deleteUser error:", error);
-    res.status(500).json({ error: "An error occurred while deleting the user" });
+    res
+      .status(500)
+      .json({ error: "An error occurred while deleting the user" });
   }
 });
-
 
 /*
 router.get("/allgoals", async (req, res) => {
@@ -180,7 +192,9 @@ router.put("/AddRating", async (req, res) => {
     return res.status(404).send({ message: "User not found" });
   }
   if (user.ratedBy?.includes(raterEmail)) {
-    return res.status(403).send({ message: "You have already rated this volunteer" });
+    return res
+      .status(403)
+      .send({ message: "You have already rated this volunteer" });
   }
 
   if (!user.ratings) user.ratings = [];
@@ -196,6 +210,4 @@ router.put("/AddRating", async (req, res) => {
   res.status(200).send({ message: "User rated successfully", user });
 });
 
-
 module.exports = router;
-

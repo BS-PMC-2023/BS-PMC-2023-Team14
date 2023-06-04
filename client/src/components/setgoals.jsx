@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Goals = () => {
-  const [userEmail, setUserEmail] = useState('');
-  const [currentWeight, setCurrentWeight] = useState('');
-  const [goalWeight, setGoalWeight] = useState('');
-  const [muscleGain, setmuscleGain] = useState('');
-  const [exerciseDays, setExerciseDays] = useState('');
-
+  const [userEmail, setUserEmail] = useState("");
+  const [currentWeight, setCurrentWeight] = useState("");
+  const [currentLength, setCurrentLength] = useState("");
+  const [goalWeight, setGoalWeight] = useState("");
+  const [muscleGain, setmuscleGain] = useState("");
+  const [exerciseDays, setExerciseDays] = useState("");
 
   const handleCurrentWeightChange = (event) => {
     setCurrentWeight(event.target.value);
+  };
+
+  const handleCurrentLengthChange = (event) => {
+    setCurrentLength(event.target.value);
   };
 
   const handleGoalWeightChange = (event) => {
@@ -21,7 +25,6 @@ const Goals = () => {
     setmuscleGain(event.target.value);
   };
 
-
   const handleExerciseDaysChange = (event) => {
     setExerciseDays(event.target.value);
   };
@@ -30,34 +33,42 @@ const Goals = () => {
     window.location.reload();
   };
 
-  
   useEffect(() => {
     // Retrieve user's email from local storage
-    const userEmail = localStorage.getItem('email');
+    const userEmail = localStorage.getItem("email");
     setUserEmail(userEmail);
     //console.log(userEmail);
   }, []);
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(userEmail, currentWeight, goalWeight, muscleGain, exerciseDays);
+    console.log(
+      userEmail,
+      currentWeight,
+      currentLength,
+      goalWeight,
+      muscleGain,
+      exerciseDays
+    );
     try {
-      const response = await axios.post("http://localhost:4000/api/user/setgoals", {
-        email: userEmail,
-        currentWeight: currentWeight,
-        goalWeight: goalWeight,
-        muscleGain: muscleGain,
-        exerciseDays: exerciseDays,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/user/setgoals",
+        {
+          email: userEmail,
+          currentWeight: currentWeight,
+          currentLength: currentLength,
+          goalWeight: goalWeight,
+          muscleGain: muscleGain,
+          exerciseDays: exerciseDays,
+        }
+      );
 
       console.log("Goals set successfully:", response.data.message);
     } catch (error) {
       console.log("Error setting goals:", error);
     }
   };
-
 
   return (
     <div>
@@ -69,6 +80,15 @@ const Goals = () => {
             type="number"
             value={currentWeight}
             onChange={handleCurrentWeightChange}
+          />
+        </label>
+        <br />
+        <label>
+          Current Length:
+          <input
+            type="double"
+            value={currentLength}
+            onChange={handleCurrentLengthChange}
           />
         </label>
         <br />
@@ -99,18 +119,24 @@ const Goals = () => {
           />
         </label>
         <br />
-        <button style={{
-          border: 'none',
-          outline: 'none',
-          backgroundColor: 'rgb(63, 235, 177)',
-          borderRadius: '20px',
-          width: '120px',
-          height: '40px',
-          fontWeight: 'bold',
-          fontSize: '14px',
-          cursor: 'pointer',
-          marginRight: '20px',
-        }} type="submit" onClick={handleRefresh}>Save</button>
+        <button
+          style={{
+            border: "none",
+            outline: "none",
+            backgroundColor: "rgb(63, 235, 177)",
+            borderRadius: "20px",
+            width: "120px",
+            height: "40px",
+            fontWeight: "bold",
+            fontSize: "14px",
+            cursor: "pointer",
+            marginRight: "20px",
+          }}
+          type="submit"
+          onClick={handleRefresh}
+        >
+          Save
+        </button>
       </form>
     </div>
   );

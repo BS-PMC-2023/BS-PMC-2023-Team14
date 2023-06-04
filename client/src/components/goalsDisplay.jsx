@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import '../components/css/displaygoals.css';
-import weightImage from './images/weight.jpg';
-import Map from './map';
-import SetGoals from './setgoals';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "../components/css/displaygoals.css";
+import weightImage from "./images/weight.jpg";
+import Map from "./map";
+import SetGoals from "./setgoals";
 
-const GoalsDisplay = ({ currentWeight, goalWeight, dailyCalorieGoal, exerciseGoal }) => {
+const GoalsDisplay = ({
+  currentWeight,
+  currentLength,
+  goalWeight,
+  dailyCalorieGoal,
+  exerciseGoal,
+}) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [goals, setGoals] = useState([]);
-  const [userEmail, setUserEmail] = useState('');
-
-
+  const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
-    const userEmail = localStorage.getItem('email');
+    const userEmail = localStorage.getItem("email");
     setUserEmail(userEmail);
   }, []);
 
@@ -35,12 +39,14 @@ const GoalsDisplay = ({ currentWeight, goalWeight, dailyCalorieGoal, exerciseGoa
     setPopupOpen(false);
   };
 
-
   async function fetchGoals() {
     try {
-      console.log(userEmail)
-      const params = new URLSearchParams([['email', userEmail]]);
-      const response = await axios.get('http://localhost:4000/api/user/getgoals', { params });
+      console.log(userEmail);
+      const params = new URLSearchParams([["email", userEmail]]);
+      const response = await axios.get(
+        "http://localhost:4000/api/user/getgoals",
+        { params }
+      );
       //console.log(response.data.goals);
       //savegoals(response.data.goals);
       setGoals(response.data.goals);
@@ -50,9 +56,7 @@ const GoalsDisplay = ({ currentWeight, goalWeight, dailyCalorieGoal, exerciseGoa
     } catch (error) {
       console.log("fetchGoals: ", error);
     }
-  };
-
-
+  }
 
   return (
     <div className="goals-display-container">
@@ -61,6 +65,10 @@ const GoalsDisplay = ({ currentWeight, goalWeight, dailyCalorieGoal, exerciseGoa
         <div className="goal">
           <div className="goal-label">Current Weight:</div>
           <div className="goal-value">{goals.currentWeight} Kg</div>
+        </div>
+        <div className="goal">
+          <div className="goal-label">Current Length:</div>
+          <div className="goal-value">{goals.currentLength} Cm</div>
         </div>
         <div className="goal">
           <div className="goal-label">Goal Weight:</div>
@@ -88,8 +96,6 @@ const GoalsDisplay = ({ currentWeight, goalWeight, dailyCalorieGoal, exerciseGoa
       {isPopupOpen && <SetGoals closePopup={closePopup} />}
       {isPopupOpen && <div className="popup-overlay" onClick={closePopup} />}
     </div>
-
-
   );
 };
 
