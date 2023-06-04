@@ -1,22 +1,42 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import "./contact.css";
-// npm i @emailjs/browser
+import axios from 'axios';
+
 const Contact = () => {
   const form = useRef();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    const userEmail = localStorage.getItem("email");
+    fetchUser(userEmail);
+  }, []);
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setUserEmail(e.target.value);
   };
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
   };
+
+  async function fetchUser(userEmail) {
+    const urlEncodedEmail = encodeURIComponent(userEmail);
+    try {
+      const response = await axios.get(`http://localhost:4000/api/user/email/${urlEncodedEmail}`);
+      setName(response.data.firstName);
+      setUserEmail(response.data.email);
+    } catch (error) {
+      console.log("fetchUser: ", error);
+    }
+  }
+
+
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
@@ -32,7 +52,7 @@ const Contact = () => {
           console.log("message sent");
           alert("your message has been sent.");
           setName("");
-          setEmail("");
+          setUserEmail("");
           setMessage("");
         },
         (error) => {
@@ -42,51 +62,43 @@ const Contact = () => {
       );
   };
   return (
-    <form className="contantForm" ref={form} onSubmit={sendEmail}>
-      <h1>Contact Us</h1>
-      <p>
-        If you have any questions or comments, please fill out the form below
-        and
-      </p>
-      <p>we will get back to you as soon as possible.</p>
-      Name:
-      <label>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleNameChange}
-          className="contact-input"
-        />
-      </label>
-      Email:
-      <label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-          className="contact-input"
-        />
-      </label>
-      Message:
-      <label>
-        <textarea
-          name="message"
-          value={message}
-          onChange={handleMessageChange}
-          className="contact-textarea"
-        />
-      </label>
-      <button
-        type="submit"
-        className="contact-button"
-        data-testid="contact-button"
-      >
-        Send
-      </button>
+
+    <form className="" ref={form} onSubmit={sendEmail}>
+      <div className="profile">
+        <div className="card-container">
+          <div className="card">
+            <h2>Contact Us</h2>
+            <div className="form-group">
+              <label htmlFor="firstName">First Name:</label>
+              <input id="firstName" name="firstName" type="text" value={name} onChange={handleNameChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="lastName">Email</label>
+              <input id="lastName" name="lastName" type="text" value={userEmail} onChange={handleEmailChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="lastName">Message</label>
+
+              <textarea
+                name="message"
+                value={message}
+                onChange={handleMessageChange}
+                className="contact-textarea"
+              />
+            </div>
+            <button
+              type="submit"
+              
+            >
+              Send
+            </button>
+          </div>
+
+        </div>
+      </div>
       {status && <div>{status}</div>}
     </form>
+
   );
 };
 export default Contact;
