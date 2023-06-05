@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import { NavLink  } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = ({ handleLogout, isAdmin }) => {
   return (
     <>
       <nav>
-        <a href="/">
-          <svg
+        <NavLink exact to="/" activeClassName="active-link">
+          {<svg
             id="logo-16"
             width="109"
             height="43"
@@ -35,36 +35,34 @@ const Navbar = ({ handleLogout, isAdmin }) => {
               className="ccustom"
               fill="#1F84EF"
             ></path>{" "}
-          </svg>
-        </a>
+          </svg>}
+        </NavLink>
         <div>
           <ul id="navbar">
             <li>
-              <a className="active" href="/">
-                Home
-              </a>
+              <NavLink exact to="/" activeClassName="active-link">Home</NavLink>
             </li>
             <li>
-              <a href="/contact">Contact Us</a>
+              <NavLink to="/contact" activeClassName="active-link">Contact Us</NavLink>
             </li>
             <li>
-              <a href="/requests">Request</a>
+              <NavLink to="/requests" activeClassName="active-link">Request</NavLink>
             </li>
             <li>
-              <a href="/AboutPage">About</a>
+              <NavLink to="/AboutPage" activeClassName="active-link">About</NavLink>
             </li>
             <li>
-              <a href="/HowToUse">HowToUse</a>
+              <NavLink to="/HowToUse" activeClassName="active-link">HowToUse</NavLink>
             </li>
             <li>
-              <a href="/volunteers">Volunteers</a>
+              <NavLink to="/volunteers" activeClassName="active-link">Volunteers</NavLink>
             </li>
             <li>
-              <a href="/profile">Profile</a>
+              <NavLink to="/profile" activeClassName="active-link">Profile</NavLink>
             </li>
             {isAdmin === "true" && (
               <li>
-                <a href="/adminPanel">Admin Panel</a>
+                <NavLink to="/adminPanel" activeClassName="active-link">Admin Panel</NavLink>
               </li>
             )}
             <li>

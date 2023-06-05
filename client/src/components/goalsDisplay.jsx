@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../components/css/displaygoals.css";
-import weightImage from "./images/weight.jpg";
+import weightImage from "./images/istockphoto.jpg";
 import Map from "./map";
 import SetGoals from "./setgoals";
 
