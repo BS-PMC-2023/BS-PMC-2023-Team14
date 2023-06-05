@@ -58,5 +58,16 @@ pipeline {
                 }
             }
         }
+     stage('Start Unit Tests') {
+            steps {
+                dir('client') {
+                    sh '''
+                        export NVM_DIR="$HOME/.nvm"
+                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                        npm run UnitTest
+                    '''
+                }
+            }
+        }
     }
 }
