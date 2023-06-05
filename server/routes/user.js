@@ -98,6 +98,8 @@ router.post("/setgoals", async (req, res) => {
       goalWeight,
       muscleGain,
       exerciseDays,
+      protein,
+      calories,
     } = req.body;
     const user = await Goal.findOne({ email });
 
@@ -110,6 +112,8 @@ router.post("/setgoals", async (req, res) => {
         goalWeight,
         muscleGain,
         exerciseDays,
+        protein,
+        calories,
       });
       await newGoal.save();
     } else {
@@ -119,6 +123,8 @@ router.post("/setgoals", async (req, res) => {
       user.goalWeight = goalWeight;
       user.muscleGain = muscleGain;
       user.exerciseDays = exerciseDays;
+      user.protein = protein;
+      user.calories = calories;
       await user.save();
     }
 

@@ -99,6 +99,16 @@ const GoalsDisplay = ({
             {calculateBMI(goals.currentWeight, goals.currentLength)}
           </div>
         </div>
+        <div className="goal">
+          <div className="goal-label">Daily protin</div>
+          <div className="goal-value">{goals.protein}
+          </div>
+        </div>
+        <div className="goal">
+          <div className="goal-label">Daily calories</div>
+          <div className="goal-value">{goals.calories}
+          </div>
+        </div>
       </div>
 
       <div className="motivation-container">

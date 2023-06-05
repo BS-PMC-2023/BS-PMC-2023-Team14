@@ -26,6 +26,14 @@ const goalSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  protein: {
+    type: Number,
+    required: true,
+  },
+  calories: {
+    type: Number,
+    required: true,
+  },
 });
 
 const Goal = mongoose.model("Goal", goalSchema);
