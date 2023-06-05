@@ -5,7 +5,7 @@ import React from 'react';
 import axios from 'axios';
 import { render, waitFor, screen } from '@testing-library/react';
 import GoalsDisplay from './components/goalsDisplay';
-import { calculateBMI, calculateExerciseDays } from './utils';
+import { calculateBMI, calculateExerciseDays , calculateDailyNeeds} from './utils';
 
 const mockData = {
   data: {
@@ -57,17 +57,11 @@ describe('GoalsDisplay', () => {
         expect(exerciseDays === mockExerciseDays)
       });
     });
+    test('calculates the correct amount of calories', async () => {
+       await waitFor(() => {
+         const calories = calculateDailyNeeds(mockData.data.goals.currentWeight, mockData.data.goals.currentLength, 15, "male", "sedentary");
+      });
+    });
 
-    // test('calculates the correct amount of calories', async () => {
-    //   await waitFor(() => {
-    //     const calories = calculateCalories(mockData.data.goals.currentWeight, mockData.data.goals.currentLength);
-    //   });
-    // });
-
-    // test('calculates the correct fat percentage', async () => {
-    //   await waitFor(() => {
-    //     const fatPercentage = calculateFatPercentage(mockData.data.goals.currentWeight, mockData.data.goals.currentLength);
-    //   });
-    // });
   });
 });
