@@ -14,6 +14,7 @@ const puppeteer = require('puppeteer');
         '/requests',
         '/AboutPage',
         '/HowToUse',
+        '/setgoals',
     ];
 
 
@@ -36,8 +37,8 @@ const puppeteer = require('puppeteer');
     await page.goto(`http://localhost:3000/login`, {
         waitUntil: "domcontentloaded",
     });
-    await page.type('input[name=email]', 'maryam19455@gmail.com');
-    await page.type('input[name=password]', 'Maryam@90');
+    await page.type('input[name=email]', 'salaqe@ac.sce.ac.il');
+    await page.type('input[name=password]', 'Ss12345678!');
     await page.click('button[data-testid="login-button"]');
     await page.waitForNavigation();//מחכה ל שינוי עמוד
     console.log(`Logged in successfully.`);
@@ -183,26 +184,33 @@ const puppeteer = require('puppeteer');
 
 
     await browser.close();// סוגר את ה browser
-})();
+
 
 //hakton
-console.log('');
-console.log(`Test Requests page..`);
-await page.goto(`http://localhost:3000/reuests`, {
- waitUntil: "domcontentloaded",
+
+/*console.log('');
+    console.log(`Test set goals..`);
+    await page.goto(`http://localhost:3000/goalsDisplay`, {
+        waitUntil: "domcontentloaded",
     });
+    let isDisplay = false;
+    await page.click('[data-testid="setgoalsbutton"]');
+    console.log(`Logged out successfully.`);
+    */
 
- let isnewRequest = false
-    await page.type('textarea[name=message]', 'Maryam is here');
-    await page.click('button[data-testid="contact-button"]');
-    page.on('console', msg => msg.text() == "message sent" ? isnewRequest = true : isnewRequest = false);
-    await timeOut(timeOutInMs);
-    if (!isnewRequest) {
-        console.log(`Failed to sent.`);
-        process.exit()
-    }
-    console.log(`Request sent successfully.`);               
-   
-
+    console.log('');
+    console.log(`Test set goals in..`);
+    await page.goto(`http://localhost:3000/setgoals`, {
+        waitUntil: "domcontentloaded",
+    });
+    await page.type('input[name=currentWeight]', '70');
+    await page.type('input[name=currentLength]', '180');
+    await page.type('input[name=goalWeight]', '65');
+    await page.type('input[name=muscleGain]', '5');
+    await page.click('button[type=submit]');
+    await page.waitForNavigation();
+  
+    console.log(`Goals set successfully.`);
+})();
 
 const timeOut = (m) => new Promise(resolve => setTimeout(resolve, m));
