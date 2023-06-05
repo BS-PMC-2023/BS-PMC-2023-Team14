@@ -23,7 +23,6 @@ function Profile() {
             setFirstName(response.data.firstName);
             setLastName(response.data.lastName);
             setUserId(response.data._id);
-            setVolunteer(Boolean(response.data.isVolunteer));
         } catch (error) {
             console.log("fetchUser: ", error);
         }
@@ -65,10 +64,7 @@ function Profile() {
                         <label htmlFor="lastName">Last Name:</label>
                         <input id="lastName" name="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="volunteer">Volunteer:</label>
-                        <input type="checkbox" name="volunteer" id="volunteer" checked={volunteer} onChange={(e) => setVolunteer(e.target.checked)} />
-                    </div>
+                  
                     <button data-testid="edit-button" id="edit-button" onClick={updateUser}>OK</button>
                 </div>
             </div>
