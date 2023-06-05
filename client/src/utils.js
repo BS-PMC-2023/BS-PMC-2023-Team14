@@ -57,9 +57,6 @@ export const calculateDailyNeeds = (weight, height, age, sex, activityLevel) => 
         throw new Error("Invalid activity level input. Expected 'sedentary', 'lightly active', 'moderately active', or 'very active'.");}
         const proteinNeeds = weight; // 1 gram per kilogram of body weight
 
-        return {
-          calories: tdee,
-          protein: proteinNeeds,
-        };   
+        return tdee; 
         
 };

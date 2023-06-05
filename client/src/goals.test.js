@@ -60,6 +60,7 @@ describe('GoalsDisplay', () => {
     test('calculates the correct amount of calories', async () => {
        await waitFor(() => {
          const calories = calculateDailyNeeds(mockData.data.goals.currentWeight, mockData.data.goals.currentLength, 15, "male", "sedentary");
+         expect(calories === 2110.9524)
       });
     });
 
