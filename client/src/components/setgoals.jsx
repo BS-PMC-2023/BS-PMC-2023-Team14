@@ -7,7 +7,7 @@ const Goals = () => {
   const [currentLength, setCurrentLength] = useState("");
   const [goalWeight, setGoalWeight] = useState("");
   const [muscleGain, setmuscleGain] = useState("");
-  const [age, setAge] = useState('22');
+  const [age, setAge] = useState(22);
   const [sex, setSex] = useState('male');
   const [activityLevel, setActivityLevel] = useState('sedentary');
 
@@ -71,6 +71,7 @@ const Goals = () => {
       protein: proteinNeeds,
     };
   };
+
 
   const calculateExerciseDays = (weight, height) => {
     const bmi = weight / ((height / 100) ** 2);

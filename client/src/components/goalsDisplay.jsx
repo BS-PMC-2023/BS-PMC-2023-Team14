@@ -101,7 +101,7 @@ const GoalsDisplay = ({
         </div>
         <div className="goal">
           <div className="goal-label">Daily protin</div>
-          <div className="goal-value">{goals.protein}
+          <div className="goal-value">{goals.protein} gr
           </div>
         </div>
         <div className="goal">
