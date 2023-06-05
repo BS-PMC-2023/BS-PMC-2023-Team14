@@ -75,38 +75,38 @@ const GoalsDisplay = ({
       <div className="goals-display">
         <div className="goal">
           <div className="goal-label">Current Weight:</div>
-          <div className="goal-value">{goals.currentWeight} Kg</div>
+          <div className="goal-value" id="currentWeight">{goals.currentWeight} Kg</div>
         </div>
         <div className="goal">
           <div className="goal-label">Height:</div>
-          <div className="goal-value">{goals.currentLength} Cm</div>
+          <div className="goal-value" id="currentLength">{goals.currentLength} Cm</div>
         </div>
         <div className="goal">
           <div className="goal-label">Goal Weight:</div>
-          <div className="goal-value">{goals.goalWeight} Kg</div>
+          <div className="goal-value" id="goalWeight">{goals.goalWeight} Kg</div>
         </div>
         <div className="goal">
           <div className="goal-label">Muscle Gain:</div>
-          <div className="goal-value">{goals.muscleGain} Kg</div>
+          <div className="goal-value" id="muscleGain">{goals.muscleGain} Kg</div>
         </div>
         <div className="goal">
           <div className="goal-label">Training Days in a Week:</div>
-          <div className="goal-value">{goals.exerciseDays}</div>
+          <div className="goal-value" id="exerciseDays">{goals.exerciseDays}</div>
         </div>
         <div className="goal">
           <div className="goal-label">Body Mass Index - BMI:</div>
-          <div className="goal-value">
+          <div className="goal-value" id="BMI">
             {calculateBMI(goals.currentWeight, goals.currentLength)}
           </div>
         </div>
         <div className="goal">
           <div className="goal-label">Daily protin</div>
-          <div className="goal-value">{goals.protein} gr
+          <div className="goal-value" id="protein">{goals.protein} gr
           </div>
         </div>
         <div className="goal">
           <div className="goal-label">Daily calories</div>
-          <div className="goal-value">{goals.calories}
+          <div className="goal-value" id="calories">{goals.calories}
           </div>
         </div>
       </div>

@@ -74,7 +74,7 @@ const Contact = () => {
             </div>
             <div className="form-group">
               <label htmlFor="lastName">Email</label>
-              <input id="lastName" name="lastName" type="text" value={userEmail} onChange={handleEmailChange} />
+              <input id="lastName" name="email" type="text" value={userEmail} onChange={handleEmailChange} />
             </div>
             <div className="form-group">
               <label htmlFor="lastName">Message</label>
@@ -87,8 +87,8 @@ const Contact = () => {
               />
             </div>
             <button
+              data-testid="contact-button"
               type="submit"
-              
             >
               Send
             </button>

@@ -133,6 +133,7 @@ const Goals = () => {
           Current Weight:
           <input
             type="number"
+            name="currentWeight"
             value={currentWeight}
             onChange={handleCurrentWeightChange}
           />
@@ -142,6 +143,7 @@ const Goals = () => {
           Height:
           <input
             type="double"
+            name="height"
             value={currentLength}
             onChange={handleCurrentLengthChange}
           />
@@ -151,6 +153,7 @@ const Goals = () => {
           Goal Weight:
           <input
             type="number"
+            name="goalWeight"
             value={goalWeight}
             onChange={handleGoalWeightChange}
           />
@@ -160,6 +163,7 @@ const Goals = () => {
           muscle gain:
           <input
             type="number"
+            name="muscleGain"
             value={muscleGain}
             onChange={handlemuscleGainChange}
           />
@@ -177,6 +181,7 @@ const Goals = () => {
             cursor: "pointer",
             marginRight: "20px",
           }}
+          name="submitGoals"
           type="submit"
           onClick={handleRefresh}
         >

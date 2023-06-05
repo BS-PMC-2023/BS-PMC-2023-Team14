@@ -88,8 +88,6 @@ const puppeteer = require('puppeteer');
         waitUntil: "domcontentloaded",
     });
     let isSent = false
-    await page.type('input[name=name]', 'my name');
-    await page.type('input[name=email]', 'testemail@gmail.com');
     await page.type('textarea[name=message]', 'test message');
     await page.click('button[data-testid="contact-button"]');
     page.on('console', msg => msg.text() == "message sent" ? isSent = true : isSent = false);
@@ -142,6 +140,82 @@ const puppeteer = require('puppeteer');
     console.log(`Profile edited successfully.`);
 
 
+    // hakton
+
+    console.log('');
+    console.log(`Test Requests page..`);
+    await page.goto(`http://localhost:3000/requests`, {
+        waitUntil: "domcontentloaded",
+    });
+    let isRequest = false
+
+
+    await page.type('textarea[name=message]', 'Maryam is here');
+    await page.click('button[data-testid="request-button"]');
+    page.on('console', msg => msg.text() == "message sent" ? isRequest = true : isRequest = false);
+    await timeOut(timeOutInMs);
+    if (!isRequest) {
+        console.log(`Failed to sent.`);
+        process.exit()
+    }
+    console.log(`Request sent successfully.`);
+
+
+    console.log('');
+    console.log(`Test set goals in..`);
+    await page.goto(`http://localhost:3000/`, {
+        waitUntil: "domcontentloaded",
+    });
+    let setgoals = false;
+    let rendergoals = false;
+
+    // test goals render
+    await page.waitForSelector('.goals-display', { timeout: 1000 });
+    const currentWeight = await page.$("#currentWeight")
+    const currentLength = await page.$("#currentLength")
+    const goalWeight = await page.$("#goalWeight")
+    const muscleGain = await page.$("#muscleGain")
+    const exerciseDays = await page.$("#exerciseDays")
+    const BMI = await page.$("#BMI")
+    const protein = await page.$("#protein")
+    const calories = await page.$("#calories")
+    if (
+        await page.evaluate((cw, cl, gw, mg, ed, bmi, p, c) => {
+            return {
+                currentWeight: cw ? cw.value : null,
+                currentLength: cl ? cl.value : null,
+                goalWeight: gw ? gw.value : null,
+                muscleGain: mg ? mg.value : null,
+                exerciseDays: ed ? ed.value : null,
+                BMI: bmi ? bmi.value : null,
+                protein: p ? p.value : null,
+                calories: c ? c.value : null,
+            };
+        }, currentWeight, currentLength, goalWeight, muscleGain, exerciseDays, BMI, protein, calories)
+    ) {
+        rendergoals = true;
+    }
+
+    // test goals form
+    await page.waitForSelector('.setgoalsbutton', { timeout: 1000 });
+    await page.click('.setgoalsbutton');
+    await page.type('input[name=currentWeight]', '70');
+    await page.type('input[name=height]', '180');
+    await page.type('input[name=goalWeight]', '65');
+    await page.type('input[name=muscleGain]', '5');
+    await page.click('button[name=submitGoals]');
+    page.on('console', msg => msg.text() == "Goals set successfully: Goals set successfully" ? setgoals = true : setgoals = false);
+    await timeOut(timeOutInMs);
+
+    if (!setgoals || !rendergoals) {
+        console.log(`Goals test failed.`);
+        process.exit()
+    }
+
+    console.log(`Goals tested successfully.`);
+
+
+
     console.log('');
     console.log(`Test Log out..`);
     await page.goto(`http://localhost:3000/`, {
@@ -160,45 +234,7 @@ const puppeteer = require('puppeteer');
     }
     console.log(`Logged out successfully.`);
 
-
-
     await browser.close();// סוגר את ה browser
-
-
-//hakton
-
-console.log('');
-console.log(`Test Requests page..`);
-await page.goto(`http://localhost:3000/reuests`, {
-    waitUntil: "domcontentloaded",
-});
-
-let isRequest = false
-await page.type('input[name=name]', 'my name');
-await page.type('input[name=email]', 'testemail@gmail.com');
-await page.type('textarea[name=message]', 'Maryam is here');
-await page.click('button[data-testid="contact-button"]');
-page.on('console', msg => msg.text() == "message sent" ? isRequest = true : isRequest = false);
-await timeOut(timeOutInMs);
-if (!isRequest) {
-    console.log(`Failed to sent.`);
-    process.exit()
-}
-console.log(`Request sent successfully.`);
-
-
-console.log('');
-console.log(`Test set goals in..`);
-await page.goto(`http://localhost:3000/setgoals`, {
-            waitUntil: "domcontentloaded",
-});
-await page.type('input[name=currentWeight]', '70');
-await page.type('input[name=currentLength]', '180');
-await page.type('input[name=goalWeight]', '65');
-await page.type('input[name=muscleGain]', '5');
-await page.click('button[type=submit]');
-await page.waitForNavigation();
-    console.log(`Goals set successfully.`);
 })();
 
 const timeOut = (m) => new Promise(resolve => setTimeout(resolve, m));
