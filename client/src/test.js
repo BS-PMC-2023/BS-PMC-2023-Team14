@@ -37,7 +37,7 @@ const puppeteer = require('puppeteer');
     await page.goto(`http://localhost:3000/login`, {
         waitUntil: "domcontentloaded",
     });
-    await page.type('input[name=email]', 'salaqe@ac.sce.ac.il');
+    await page.type('input[name=email]', 'salahqe@ac.sce.ac.il');
     await page.type('input[name=password]', 'Ss12345678!');
     await page.click('button[data-testid="login-button"]');
     await page.waitForNavigation();//מחכה ל שינוי עמוד
@@ -99,27 +99,6 @@ const puppeteer = require('puppeteer');
         process.exit()
     }
     console.log(`Message sent successfully.`);
-
-
-
-    console.log('');
-    console.log(`Test Requests page..`);
-    await page.goto(`http://localhost:3000/reuests`, {
-        waitUntil: "domcontentloaded",
-    });
-
-    let isRequest = false
-    await page.type('input[name=name]', 'my name');
-    await page.type('input[name=email]', 'testemail@gmail.com');
-    await page.type('textarea[name=message]', 'Maryam is here');
-    await page.click('button[data-testid="contact-button"]');
-    page.on('console', msg => msg.text() == "message sent" ? isRequest = true : isRequest = false);
-    await timeOut(timeOutInMs);
-    if (!isRequest) {
-        console.log(`Failed to sent.`);
-        process.exit()
-    }
-    console.log(`Request sent successfully.`);
 
 
 
@@ -188,28 +167,37 @@ const puppeteer = require('puppeteer');
 
 //hakton
 
-/*console.log('');
-    console.log(`Test set goals..`);
-    await page.goto(`http://localhost:3000/goalsDisplay`, {
-        waitUntil: "domcontentloaded",
-    });
-    let isDisplay = false;
-    await page.click('[data-testid="setgoalsbutton"]');
-    console.log(`Logged out successfully.`);
-    */
+console.log('');
+console.log(`Test Requests page..`);
+await page.goto(`http://localhost:3000/reuests`, {
+    waitUntil: "domcontentloaded",
+});
 
-    console.log('');
-    console.log(`Test set goals in..`);
-    await page.goto(`http://localhost:3000/setgoals`, {
-        waitUntil: "domcontentloaded",
-    });
-    await page.type('input[name=currentWeight]', '70');
-    await page.type('input[name=currentLength]', '180');
-    await page.type('input[name=goalWeight]', '65');
-    await page.type('input[name=muscleGain]', '5');
-    await page.click('button[type=submit]');
-    await page.waitForNavigation();
-  
+let isRequest = false
+await page.type('input[name=name]', 'my name');
+await page.type('input[name=email]', 'testemail@gmail.com');
+await page.type('textarea[name=message]', 'Maryam is here');
+await page.click('button[data-testid="contact-button"]');
+page.on('console', msg => msg.text() == "message sent" ? isRequest = true : isRequest = false);
+await timeOut(timeOutInMs);
+if (!isRequest) {
+    console.log(`Failed to sent.`);
+    process.exit()
+}
+console.log(`Request sent successfully.`);
+
+
+console.log('');
+console.log(`Test set goals in..`);
+await page.goto(`http://localhost:3000/setgoals`, {
+            waitUntil: "domcontentloaded",
+});
+await page.type('input[name=currentWeight]', '70');
+await page.type('input[name=currentLength]', '180');
+await page.type('input[name=goalWeight]', '65');
+await page.type('input[name=muscleGain]', '5');
+await page.click('button[type=submit]');
+await page.waitForNavigation();
     console.log(`Goals set successfully.`);
 })();
 
