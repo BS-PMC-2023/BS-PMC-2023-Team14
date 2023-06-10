@@ -66,8 +66,8 @@ const Requests = () => {
 
     <form className="" ref={form} onSubmit={sendEmail}>
       <div className="profile">
-        <div className="card_container">
-          <div className="_card">
+      <div className="card-container">
+          <div className="card">
             <h2>Request to be a volunteer</h2>
             <div className="form-group">
               <label For="First Name">First Name:</label>
