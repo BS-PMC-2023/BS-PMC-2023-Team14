@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { User } = require("../models/user");
 const { Goal } = require("../models/goal");
 const { json } = require("express");
+const { Reviews } = require("../models/reviews");
 
 router.get("/email/:email", async (req, res) => {
   try {
@@ -215,5 +216,28 @@ router.put("/AddRating", async (req, res) => {
   await user.save();
   res.status(200).send({ message: "User rated successfully", user });
 });
+
+
+router.post("/reviews", async (req, res) => {
+  try {
+    const {
+      email,
+      feedback,
+    } = req.body;
+
+    const newReviews = new Reviews({
+      email,
+      feedback,
+    });
+    
+    await newReviews.save();
+    return res.status(200).send({ message: "Review submitted successfully" });
+  } catch (error) {
+    console.error("Error submitting review:", error);
+    return res.status(500).send({ message: "Internal server error" });
+  }
+});
+
+
 
 module.exports = router;

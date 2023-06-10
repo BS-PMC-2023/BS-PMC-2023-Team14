@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import ReviewModal from './components/ReviewModal';
 import Main from "./components/Main";
 import Signup from "./components/Singup";
 import Login from "./components/Login";
@@ -13,12 +14,11 @@ import PasswordReset from "./components/PasswordReset";
 import Requests from "./components/Requests/reuests";
 import AdminPanel from "./components/AdminPanel/AdminPanel.jsx";
 import Rate from "./components/Rating/index.jsx";
+import NavigateButton from './NavigateButton';
 
 function App() {
   const isAdmin = localStorage.getItem("isAdmin");
-
   const userToken = localStorage.getItem("token");
-
   const handleLogout = () => {
     localStorage.clear();
     window.location = "/";
@@ -27,9 +27,11 @@ function App() {
   return (
     <BrowserRouter>
       {userToken && <Navbar isAdmin={isAdmin} handleLogout={handleLogout} />}
+      <NavigateButton />
       <Routes>
         {userToken && <Route path="/" exact element={<Main />} />}
         {isAdmin && <Route path="/adminPanel" exact element={<AdminPanel />} />}
+        <Route path="/review" exact element={<ReviewModal />} />
         <Route path="/Volunteers" exact element={<Volunteer />} />
         <Route path="/profile" exact element={<Profile />} />
         <Route path="/signup" exact element={<Signup />} />
@@ -41,7 +43,6 @@ function App() {
         <Route path="/HowToUse" exact element={<HowToUse />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/password-reset/:id/:token" element={<PasswordReset />} />
-        <Route path="/Rate/:email" exact element={<Rate />} />
       </Routes>
     </BrowserRouter>
   );
