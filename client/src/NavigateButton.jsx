@@ -7,6 +7,7 @@ const NavigateButton = () => {
     <button
       style={{
         position: "fixed",
+        backgroundColor: "#3bb19b",
         right: "6px",
         bottom: "6px",
         cursor: "pointer",

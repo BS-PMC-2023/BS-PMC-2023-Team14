@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import axios from 'axios';
-//import './ReviewModal.css';  // import your css
+import axios from "axios";
+import "./ReviewModal.css"; // import your css
+import { useNavigate } from "react-router-dom";
 
 const ReviewModal = ({ onClose }) => {
   const form = useRef();
@@ -8,7 +9,7 @@ const ReviewModal = ({ onClose }) => {
   const [status, setStatus] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [name, setName] = useState("");
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userEmail = localStorage.getItem("email");
@@ -25,10 +26,18 @@ const ReviewModal = ({ onClose }) => {
     setMessage(e.target.value);
   };
 
+  const handleModalClick = (e) => {
+    if (e.target.classList.contains("review-modal")) {
+      navigate("/");
+    }
+  };
+
   async function fetchUser(userEmail) {
     const urlEncodedEmail = encodeURIComponent(userEmail);
     try {
-      const response = await axios.get(`http://localhost:4000/api/user/email/${urlEncodedEmail}`);
+      const response = await axios.get(
+        `http://localhost:4000/api/user/email/${urlEncodedEmail}`
+      );
       setName(response.data.firstName);
       setUserEmail(response.data.email);
     } catch (error) {
@@ -46,44 +55,54 @@ const ReviewModal = ({ onClose }) => {
         }
       );
 
-      console.log("Goals set successfully:", response.data.message);
+      console.log("Feedback sent successfully:", response.data.message);
+      // Optional: Close the modal after submitting
+      onClose();
     } catch (error) {
-      console.log("Error setting goals:", error);
+      console.log("Error sending feedback:", error);
+      setStatus("Error sending feedback.");
     }
-  }
+  };
   return (
-    <form className="" ref={form} onSubmit={handleSubmit}>
-      <div className="profile">
-        <div className="card-container">
-          <div className="card">
-            <h2>Give us your thoughts about the website !</h2>
-            <div className="form-group">
-              <label htmlFor="firstName">First Name:</label>
-              <input id="firstName" name="firstName" type="text" value={name} onChange={handleNameChange} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="lastName">Email</label>
-              <input id="lastName" name="lastName" type="text" value={userEmail} onChange={handleEmailChange} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="lastName">FeedBack</label>
-              <textarea
-                name="message"
-                value={message}
-                onChange={handleMessageChange}
-                className="contact-textarea"
-              />
-            </div>
-            <button
-              type="submit"
-            >
-              Send
-            </button>
+    <div className="review-modal" onClick={handleModalClick}>
+      <div className="review-modal-content">
+        <form ref={form} onSubmit={handleSubmit}>
+          <h2>Give us your thoughts about the website!</h2>
+          <div className="form-group">
+            <label htmlFor="firstName">First Name:</label>
+            <input
+              id="firstName"
+              name="firstName"
+              type="text"
+              value={name}
+              onChange={handleNameChange}
+            />
           </div>
-        </div>
+          <div className="form-group">
+            <label htmlFor="lastName">Email:</label>
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              value={userEmail}
+              onChange={handleEmailChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="lastName">Feedback:</label>
+            <textarea
+              name="message"
+              value={message}
+              onChange={handleMessageChange}
+              className="contact-textarea"
+            />
+          </div>
+          <button type="submit" className="review-modal-submit">
+            Send
+          </button>
+        </form>
       </div>
-      {status && <div>{status}</div>}
-    </form>
+    </div>
   );
 };
 
