@@ -81,7 +81,7 @@ function Volunteers() {
                     <div className="Card" data-testid="Card" key={data._id}>
                         <img src="https://th.bing.com/th/id/OIP.a0fM1-y4XOYg-a_VC0wfJgHaHa?pid=ImgDet&rs=1" />
                         <h2>Name: {data.firstName}</h2>
-                        <p>Email: {data.email}</p>
+                        <h2>Email: {data.email}</h2>
                         <div>Rate: {<StarRatings
                             rating={averageRating(data.ratings)}
                             numberOfStars={5}
