@@ -70,11 +70,11 @@ const Requests = () => {
           <div className="_card">
             <h2>Request to be a volunteer</h2>
             <div className="form-group">
-              <label For="firstName">First Name:</label>
+              <label For="First Name">First Name:</label>
               <input id="firstName" name="firstName" type="text" value={name} onChange={handleNameChange} />
             </div>
             <div className="form-group">
-              <label For="lastName">Email</label>
+              <label For="Email">Email</label>
               <input id="lastName" name="lastName" type="text" value={userEmail} onChange={handleEmailChange} />
             </div>
             <div className="form-group">
