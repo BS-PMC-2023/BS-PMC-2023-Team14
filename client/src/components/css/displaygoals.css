@@ -80,3 +80,25 @@
 	cursor: pointer;
 	margin-right: 20px;
 }
+
+
+.goal-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.goal-label {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.goal-value {
+  flex-grow: 1;
+}
+
+.divider {
+  border: 1px solid #ccc;
+  margin: 16px 0;
+}

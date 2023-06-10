@@ -15,6 +15,7 @@ import Requests from "./components/Requests/reuests";
 import AdminPanel from "./components/AdminPanel/AdminPanel.jsx";
 import Rate from "./components/Rating/index.jsx";
 import NavigateButton from './NavigateButton';
+import DisplayReviews from './components/displayReviews.jsx';
 
 function App() {
   const isAdmin = localStorage.getItem("isAdmin");
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         {userToken && <Route path="/" exact element={<Main />} />}
         {isAdmin && <Route path="/adminPanel" exact element={<AdminPanel />} />}
+        {isAdmin && <Route path="/DisplayReviews" exact element={<DisplayReviews />} />}
         <Route path="/review" exact element={<ReviewModal />} />
         <Route path="/Volunteers" exact element={<Volunteer />} />
         <Route path="/profile" exact element={<Profile />} />

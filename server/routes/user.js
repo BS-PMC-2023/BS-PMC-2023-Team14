@@ -240,4 +240,15 @@ router.post("/reviews", async (req, res) => {
 
 
 
+router.get("/getReviews", async (req, res) => {
+  try {
+    const reviews = await Reviews.find();
+    return res.status(200).json(reviews);
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
 module.exports = router;

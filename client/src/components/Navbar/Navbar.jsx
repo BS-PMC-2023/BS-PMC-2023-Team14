@@ -1,4 +1,4 @@
-import { NavLink  } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = ({ handleLogout, isAdmin }) => {
@@ -6,7 +6,7 @@ const Navbar = ({ handleLogout, isAdmin }) => {
     <>
       <nav>
         <NavLink exact to="/" activeClassName="active-link">
-          { <svg
+          {<svg
             id="logo-16"
             width="109"
             height="43"
@@ -65,9 +65,14 @@ const Navbar = ({ handleLogout, isAdmin }) => {
               </>
             )}
             {isAdmin === "true" && (
-              <li>
-                <NavLink to="/adminPanel" activeClassName="active-link">Admin Panel</NavLink>
-              </li>
+              <>
+                <li>
+                  <NavLink to="/adminPanel" activeClassName="active-link">Admin Panel</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/DisplayReviews" activeClassName="active-link">User's feedback</NavLink>
+                </li>
+              </>
             )}
             <li>
               <button
