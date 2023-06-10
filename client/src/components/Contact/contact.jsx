@@ -65,8 +65,8 @@ const Contact = () => {
 
     <form className="" ref={form} onSubmit={sendEmail}>
       <div className="profile">
-        <div className="card-container">
-          <div className="card">
+        <div className="card_container">
+          <div className="_card">
             <h2>Contact Us</h2>
             <div className="form-group">
               <label htmlFor="firstName">First Name:</label>

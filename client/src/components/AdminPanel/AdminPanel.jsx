@@ -56,7 +56,7 @@ function AdminPanel() {
 
     return (
         <div>
-            <h1>Admin Panel</h1>
+            <h1></h1>
             <table className="users-table">
                 <thead>
                     <tr>
@@ -72,24 +72,22 @@ function AdminPanel() {
                     {users.map(data => (
                         <tr key={data._id}>
                             <td>{data.firstName}</td>
-                            <td>{data.email}</td>
+                            <td>www.{data.email}</td>
                             <td>{data.isAdmin ? 'admin' : data.isVolunteer ? 'volunteer' : 'user'}</td>
                             <td>
                                 {!data.isAdmin && (<button className="buttons" onClick={() => handleAdmin(data._id)}>
-                                    Make Admin</button>)}
+                                     Make Admin <i class="fas fa-plus"></i></button>)}
                                 {data.isAdmin && (<button className="buttons" onClick={() => handleAdmin(data._id)}>
-                                    Remove Admin</button>)}
+                                    Remove Admin <i class="fas fa-trash"></i></button>)}
                             </td>
                             <td>
                                 {!data.isVolunteer && (<button className="buttons" onClick={() => handleVolunteer(data._id)}>
-                                    Make Volunteer</button>)}
+                                    Make Volunteer <i class="fas fa-plus"></i></button>)}
                                 {data.isVolunteer && (<button className="buttons" onClick={() => handleVolunteer(data._id)}>
-                                    Remove Volunteer</button>)}
+                                    Remove Volunteer <i class="fa fa-trash"></i></button>)}
                             </td>
                             <td>
-                                <button className="delete-button" onClick={() => handleDelete(data.email)}>
-                                    <span className="icon">x</span>
-                                </button>
+                                <button className="delete_button" onClick={() => handleDelete(data.email)}><i class="fa fa-trash"></i></button>
                             </td>
                         </tr>
                     ))}

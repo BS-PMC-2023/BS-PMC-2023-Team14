@@ -66,16 +66,16 @@ const Requests = () => {
 
     <form className="" ref={form} onSubmit={sendEmail}>
       <div className="profile">
-        <div className="card-container">
-          <div className="card">
+        <div className="card_container">
+          <div className="_card">
             <h2>Request to be a volunteer</h2>
             <div className="form-group">
               <label htmlFor="firstName">First Name:</label>
-              <input id="firstName" name="firstName" type="text" value={name} onChange={handleNameChange} />
+              <input type="text" id="fname" name="firstname" value={name} onChange={handleNameChange} />
             </div>
             <div className="form-group">
               <label htmlFor="lastName">Email</label>
-              <input id="lastName" name="lastName" type="text" value={userEmail} onChange={handleEmailChange} />
+              <input type="text" id="lname" name="lastname" value={userEmail} onChange={handleEmailChange} />
             </div>
             <div className="form-group">
               <label htmlFor="lastName">Why do you want to be a volunteer? Talk about yourself</label>

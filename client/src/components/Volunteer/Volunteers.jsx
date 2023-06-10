@@ -76,10 +76,10 @@ function Volunteers() {
                     <button onClick={() => setModalIsOpen(false)}>Close</button>
                 </div>
             </Modal>
-            <div className="card-container">
+            <div className="cardContainer">
                 {users.map(data => (
-                    <div className="card" data-testid="card" key={data._id}>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Person_icon_BLACK-01.svg" />
+                    <div className="Card" data-testid="Card" key={data._id}>
+                        <img src="https://th.bing.com/th/id/OIP.a0fM1-y4XOYg-a_VC0wfJgHaHa?pid=ImgDet&rs=1" />
                         <h2>Name: {data.firstName}</h2>
                         <p>Email: {data.email}</p>
                         <div>Rate: {<StarRatings
@@ -94,7 +94,7 @@ function Volunteers() {
                                 <p key={index}>{comment}</p>
                             ))}
                         </div>
-                        {!data.ratedBy?.includes(email) && <button onClick={() => { setCurrentEmail(data.email); setModalIsOpen(true) }}>Rate</button>}
+                        {!data.ratedBy?.includes(email) && <button className="button_rate" onClick={() => { setCurrentEmail(data.email); setModalIsOpen(true) }}>Rate</button>}
                     </div>
                 ))}
 

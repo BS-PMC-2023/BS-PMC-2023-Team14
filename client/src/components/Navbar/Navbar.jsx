@@ -144,7 +144,7 @@ const Navbar = ({ handleLogout, isAdmin }) => {
               <NavLink to="/HowToUse" activeClassName="active-link">HowToUse</NavLink>
             </li>
             <li>
-              <NavLink to="/volunteers" activeClassName="active-link">Volunteers</NavLink>
+              <NavLink to="/Volunteers" activeClassName="active-link">Volunteers</NavLink>
             </li>
             <li>
               <NavLink to="/profile" activeClassName="active-link">Profile</NavLink>

@@ -53,19 +53,18 @@ function Profile() {
 
     return (
         <div className="profile">
-            <div className="card-container">
-                <div className="card">
+            <div className="card_container">
+                <div className="_card">
                     <h2>Edit Profile</h2>
                     <div className="form-group">
-                        <label htmlFor="firstName">First Name:</label>
-                        <input id="firstName" name="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                        <label for="fname">First Name:</label>
+                        <input type="text" id="fname" name="firstname" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="lastName">Last Name:</label>
-                        <input id="lastName" name="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                        <label for="lname">Last Name:</label>
+                        <input type="text" id="lname" name="lastname" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                     </div>
-                  
-                    <button data-testid="edit-button" id="edit-button" onClick={updateUser}>OK</button>
+                    <input type="submit" value="Submit"onClick={updateUser}/>
                 </div>
             </div>
         </div>
