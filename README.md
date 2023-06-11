@@ -2,6 +2,8 @@
 
 This web application aims to empower individuals to make informed decisions about their nutrition and health, addressing global health issues of obesity and malnutrition.
 
+![Screenshot of the app](url-to-screenshot)
+
 ## Technologies Used
 
 This application leverages the power of APIs and open databases to provide accurate and comprehensive nutritional information. The technology stack includes:
