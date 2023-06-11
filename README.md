@@ -1,4 +1,5 @@
 # HealthFuel
+
 # Personal Health and Fitness Tracker
 
 This web application aims to empower individuals to make informed decisions about their nutrition and health, addressing global health issues of obesity and malnutrition.
@@ -31,15 +32,14 @@ To run this application locally, follow these steps:
 ### Client:
 
 1. Navigate to the client directory: "cd client"
-2. Install the required packages: "npm install"
+2. Install the required packages: "npm install" / "npm i"
 3. Start the application: "npm start"
 
 ### Server:
 
 1. Navigate to the server directory: "cd server"
-2. Install the required packages: "npm install"
+2. Install the required packages: "npm install" / "npm i"
 3. Start the server: "npm start"
-
 
 ## Usage
 
