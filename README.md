@@ -36,3 +36,16 @@ To run this application locally, follow these steps:
 1. Navigate to the server directory: "cd server"
 2. Install the required packages: "npm install"
 3. Start the server: "npm start"
+
+
+## Usage
+
+The website is intuitive and user-friendly. Users can access it from any device to track their health goals, locate nearby gyms, watch exercise videos, and receive personalized fitness advice based on their health metrics.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
