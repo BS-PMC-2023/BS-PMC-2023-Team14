@@ -1,3 +1,4 @@
+# HealthFuel
 # Personal Health and Fitness Tracker
 
 This web application aims to empower individuals to make informed decisions about their nutrition and health, addressing global health issues of obesity and malnutrition.
