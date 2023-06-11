@@ -1,9 +1,20 @@
+.contantForm {
+  height: 50%;
+  margin-top: 10%;
+  margin-left: 20%;
+  margin-right: 30%;
+  background-image: url("../images/helpcenter.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 15%;
+}
 .profile {
-  display: flex;
+  display:flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   padding: 20px;
+  height: 400px;
+  margin: 350px;
 }
 
 .card_container {
@@ -13,7 +24,7 @@
   background-color:azure;
   margin-top: -200px;
   border-radius: 100px;
-  height: 700px;
+  height: 400px;
   
 }
 
