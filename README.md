@@ -2,7 +2,7 @@
 
 This web application aims to empower individuals to make informed decisions about their nutrition and health, addressing global health issues of obesity and malnutrition.
 
-![Screenshot of the app](url-to-screenshot)
+![Screenshot of the app](./client/src/components/images/Screenshot.png)
 
 ## Technologies Used
 
