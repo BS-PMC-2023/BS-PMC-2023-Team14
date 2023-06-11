@@ -34,3 +34,5 @@ To run this application locally, follow these steps:
 ### Server:
 
 1. Navigate to the server directory: "cd server"
+2. Install the required packages: "npm install"
+3. Start the server: "npm start"
