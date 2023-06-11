@@ -29,3 +29,4 @@ To run this application locally, follow these steps:
 
 1. Navigate to the client directory: "cd client"
 2. Install the required packages: "npm install"
+3. Start the server side: "npm start"
