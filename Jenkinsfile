@@ -70,10 +70,17 @@ pipeline {
             }
         }
         stage('Code Coverage') {
-        steps {
-            sh 'npm t -- --coverage'
+            steps {
+                dir('client') {
+                    sh '''
+                export NVM_DIR="$HOME/.nvm"
+                [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                npm t -- --coverage
+            '''
+                }
+            }
         }
-        }
+
         stage('Run tests and archive results') {
             steps {
                 sh '''
