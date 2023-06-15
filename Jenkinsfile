@@ -2,6 +2,21 @@ pipeline {
     agent any
 
     stages {
+        stage('Install dependencies') {
+            steps {
+                sh '''
+                    sudo apt-get update
+                    sudo apt-get install -y libnss3
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                    nvm install node
+                    node --version
+                    npm --version
+                    npm install -g nyc
+                '''
+            }
+        }
+
         stage('Install Node.js and dependencies') {
             steps {
                 sh '''
@@ -25,7 +40,7 @@ pipeline {
                     sh '''
                         export NVM_DIR="$HOME/.nvm"
                         [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                        export DB="mongodb+srv://admin:admin123@cluster0.nswvsqy.mongodb.net/test"
+                        export DB="mongodb+srv://admin:admin123@cluster0.mongodb.net/test"
                         export JWTPRIVATEKEY="123"
                         nohup npm start > output.log 2>&1 &
                         sleep 5
@@ -58,6 +73,7 @@ pipeline {
                 }
             }
         }
+
         stage('Start Unit Tests') {
             steps {
                 dir('client') {
@@ -69,34 +85,29 @@ pipeline {
                 }
             }
         }
-                stage('Check code coverage') {
+
+        stage('Test Coverage') {
             steps {
-                sh '''
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-            cd client
-            npm run test
-
-            # Fail if code coverage is below 80%
-            if [ $(nyc report --reporter=text-summary | grep 'All files' | awk '{print $5}' | sed 's/%//') -lt 80 ]
-            then
-                echo "Code coverage is less than 80%"
-                exit 1
-            fi
-        '''
+                dir('client') {
+                    sh '''
+                        export NVM_DIR="$HOME/.nvm"
+                        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                        nyc npm test
+                        nyc report --reporter=text-lcov > coverage.lcov
+                    '''
+                    script {
+                        // This will fail the build if coverage is under 80%
+                        def coverage = sh(returnStdout: true, script: 'nyc report --reporter=text-summary | grep "All files" | sed "s/%//" | awk "{print $5}"').trim() as Integer
+                        if (coverage < 80) {
+                            error("Test coverage is under 80%")
+                        }
+                    }
+                }
             }
-        }
-        stage('Run tests and archive results') {
-            steps {
-                sh '''
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-            cd client
-            npm run test
-        '''
-                junit '**/test-results.xml'
+            post {
+                always {
+                    publishCoverage adapters: [coberturaAdapter('coverage.xml')], sourceFileResolver: sourceFiles('STORE_LAST_BUILD')
+                }
             }
         }
     }
