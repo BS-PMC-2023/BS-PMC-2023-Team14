@@ -69,6 +69,35 @@ pipeline {
                 }
             }
         }
+                stage('Check code coverage') {
+            steps {
+                sh '''
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
+            cd client
+            npm run test
+
+            # Fail if code coverage is below 80%
+            if [ $(nyc report --reporter=text-summary | grep 'All files' | awk '{print $5}' | sed 's/%//') -lt 80 ]
+            then
+                echo "Code coverage is less than 80%"
+                exit 1
+            fi
+        '''
+            }
+        }
+        stage('Run tests and archive results') {
+            steps {
+                sh '''
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+            cd client
+            npm run test
+        '''
+                junit '**/test-results.xml'
+            }
+        }
     }
 }
