@@ -72,25 +72,12 @@ pipeline {
         stage('Code Coverage') {
             steps {
                 dir('client') {
-                    sh '''
-                export NVM_DIR="$HOME/.nvm"
-                [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-                npm t -- --coverage
-            '''
-                }
-            }
-        }
-
-        stage('Run tests and archive results') {
-            steps {
                 sh '''
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-            cd client
-            npm run test
-        '''
-                junit '**/test-results.xml'
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                    npm t -- --coverage
+                '''
+                }
             }
         }
     }
