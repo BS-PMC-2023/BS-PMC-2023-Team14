@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Who changed what') {
+        stage('Metrics 1 - Ci') {
             steps {
                 sh 'git log -n 1 --pretty=format:"%an made a commit: %h"'
             }
@@ -70,7 +70,7 @@ pipeline {
                 }
             }
         }
-        stage('Code Coverage') {
+        stage('Metrics 1 - Code Coverage') {
             steps {
                 dir('client') {
                     sh '''
