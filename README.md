@@ -20,7 +20,7 @@ This application leverages the power of APIs and open databases to provide accur
 
 ## Features
 
-- Personal Goal Tracker: Users can track their health metrics such as weight, height, muscle gain, BMI, and daily nutritional needs.
+- Personal Goal Tracker:  Users can track their health metrics such as weight, height, muscle gain, BMI, and daily nutritional needs.
 - Gym Locator: The application displays a map with nearby gym locations. It also displays motivational quotes to inspire users to stay fit.
 - Health Metrics Input: Users can manually set their height and weight, enabling the application to provide more personalized health and fitness recommendations.
 - Exercise Video Library: The website hosts a range of exercise videos, categorized by workout type, to guide users in their fitness journey.
