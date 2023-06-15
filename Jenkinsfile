@@ -69,6 +69,16 @@ pipeline {
                 }
             }
         }
-
+        stage('Code Coverage') {
+            steps {
+                dir('client') {
+                sh '''
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                    npm t -- --coverage
+                '''
+                }
+            }
+        }
     }
 }
