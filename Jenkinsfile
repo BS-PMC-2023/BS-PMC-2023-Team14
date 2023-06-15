@@ -1,7 +1,11 @@
 pipeline {
     agent any
-
     stages {
+        stage('Who changed what') {
+            steps {
+                sh 'git log -n 1 --pretty=format:"%an made a commit: %h"'
+            }
+        }
         stage('Install Node.js and dependencies') {
             steps {
                 sh '''
@@ -18,7 +22,6 @@ pipeline {
                 '''
             }
         }
-
         stage('Start Server') {
             steps {
                 dir('server') {
@@ -33,7 +36,6 @@ pipeline {
                 }
             }
         }
-
         stage('Start Client') {
             steps {
                 dir('client') {
@@ -46,7 +48,6 @@ pipeline {
                 }
             }
         }
-
         stage('Start Integration Tests') {
             steps {
                 dir('client') {
@@ -72,7 +73,7 @@ pipeline {
         stage('Code Coverage') {
             steps {
                 dir('client') {
-                sh '''
+                    sh '''
                     export NVM_DIR="$HOME/.nvm"
                     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
                     npm t -- --coverage
@@ -80,5 +81,8 @@ pipeline {
                 }
             }
         }
+    }
+    triggers {
+        pollSCM('* * * * *')
     }
 }
