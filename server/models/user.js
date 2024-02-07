@@ -10,7 +10,12 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
   isVolunteer: { type: Boolean, default: false },
+  ratedBy: { type: [String], default: [] },
+  ratings: { type: [Number], default: [] },
+  comments: { type: [String], default: [] },
+
 });
+
 
 userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
@@ -18,6 +23,8 @@ userSchema.methods.generateAuthToken = function () {
   });
   return token;
 };
+
+
 
 const User = mongoose.model("user", userSchema);
 

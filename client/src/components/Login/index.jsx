@@ -19,6 +19,8 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("isAdmin", res.data.isAdmin);
       localStorage.setItem("isVolunteer", res.data.isAdmin);
+      localStorage.setItem("email", data.email);
+
       window.location = "/";
     } catch (error) {
       if (
@@ -36,7 +38,7 @@ const Login = () => {
       <div className={styles.login_form_container}>
         <div className={styles.left}>
           <form className={styles.form_container} onSubmit={handleSubmit}>
-            <h1 style={{color: '#3bb19b'}} >Login to Your Account</h1>
+            <h1 style={{ color: '#3bb19b' }} >Login to Your Account</h1>
             <input
               type="email"
               placeholder="Email"
@@ -45,6 +47,7 @@ const Login = () => {
               value={data.email}
               required
               className={styles.input}
+              data-testid="email"
             />
             <input
               type="password"
@@ -61,7 +64,7 @@ const Login = () => {
             </Link>
 
             {error && <div className={styles.error_msg}>{error}</div>}
-            <button type="submit" className={styles.green_btn}>
+            <button type="submit" className={styles.green_btn} data-testid="login-button">
               Sign In
             </button>
           </form>

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
-import Map from "../map";
 import "./styles.css";
 import Goalsdisplay from "../goalsDisplay";
 import Modal from "../Modal/Modal";
-
 const Main = ({ user }) => {
   const [users, setUsers] = useState([]);
   const [exercises, setExercises] = useState([]);
@@ -30,8 +28,8 @@ const Main = ({ user }) => {
   }
 
   useEffect(async () => {
-      await fetchAllExercises();
-    }, []);
+    await fetchAllExercises();
+  }, []);
 
   const showModal = (data) => {
     setModalContent(data);
@@ -47,29 +45,29 @@ const Main = ({ user }) => {
       {user && <Navbar handleLogout={handleLogout} />}
       <Modal visible={modalVisible} onClose={closeModal} data={modalContent} />
       <div className="mainDiv">
-        <Goalsdisplay />
-        <div className="exercises-container">
-          {exercises.map((data) => (
-            < div
-              key={data._id}
-              className="exercise-card"
-              onClick={() => showModal(data)}
-            >
-              <h3>{data.exercise_name}</h3>
-              <div className="video-container">
-                <video width="320" height="240" controls>
-                  (
-                  {data.videoURL.map((url, index) => (
-                    <source key={index} src={url} type="video/mp4" />
-                  ))}
-                  Your browser does not support the video tag.
-                  )
-                </video>
-              </div>
+      </div>
+      <Goalsdisplay />
+      <div className="exercises-container">
+        {exercises.map((data) => (
+          < div
+            key={data.id}
+            className="exercise-card"
+            onClick={() => showModal(data)}
+          >
+            <h3>{data.exercise_name}</h3>
+            <div className="video-container" data-testid="video-container">
+              <video width="320" height="240" controls>
+                (
+                {data.videoURL.map((url, index) => (
+                  <source key={index} src={url} type="video/mp4" />
+                ))}
+                Your browser does not support the video tag.
+                )
+              </video>
             </div>
-          ))}
-        </div>
-      </div >
+          </div>
+        ))}
+      </div>
     </>
   );
 };
